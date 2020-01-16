@@ -32,10 +32,10 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldListAllLibraryBooksAfterTheWelcomeMessageAppears() {
+    public void shouldListMenuAfterTheWelcomeMessageAppears() {
         BibliotecaApp.main(null);
 
         verify(printStream).println(Welcome.MESSAGE);
-        verify(printStream).println(BookList.MESSAGE);
+        verify(printStream).println(BookList.LABEL);
     }
 }

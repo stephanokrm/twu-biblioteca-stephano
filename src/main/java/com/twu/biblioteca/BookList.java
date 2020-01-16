@@ -8,6 +8,7 @@ public class BookList {
     private PrintStream printStream;
     private List<Book> books;
 
+    public static final String LABEL = "1. List of Books";
     public static final String MESSAGE = "Books\n";
 
     public BookList(PrintStream printStream, List<Book> books) {
