@@ -28,6 +28,14 @@ public class BibliotecaAppTest {
     public void shouldShowWelcomeMessageWhenIStartTheApplication() {
         BibliotecaApp.main(null);
 
-        verify(printStream).println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
+        verify(printStream).println(Welcome.MESSAGE);
+    }
+
+    @Test
+    public void shouldListAllLibraryBooksAfterTheWelcomeMessageAppears() {
+        BibliotecaApp.main(null);
+
+        verify(printStream).println(Welcome.MESSAGE);
+        verify(printStream).println("Books:\n");
     }
 }
