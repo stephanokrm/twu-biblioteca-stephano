@@ -9,7 +9,6 @@ public class BookList {
     private List<Book> books;
 
     public static final String LABEL = "1. List of Books";
-    public static final String MESSAGE = "Books\n";
 
     public BookList(PrintStream printStream, List<Book> books) {
         this.printStream = printStream;
@@ -20,7 +19,6 @@ public class BookList {
         List<String> booksAsStringList = books.stream().map(Book::toString).collect(Collectors.toList());
         String booksAsString = String.join("\n", booksAsStringList);
 
-        printStream.println(MESSAGE);
         printStream.println(booksAsString);
     }
 }
