@@ -33,6 +33,6 @@ public class BookListTest {
         bookList.show();
 
         verify(printStream).println("Books\n");
-        verify(printStream).println("Title: Book 1 | Author: Person 1 | Year: 2020\nTitle: Book 2 | Author: Person 2 | Year: 2020");
+        verify(printStream).println("Title: Book 1 | Author: Person 1 | Published Year: 2020\nTitle: Book 2 | Author: Person 2 | Published Year: 2020");
     }
 }
