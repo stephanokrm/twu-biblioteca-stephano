@@ -13,7 +13,7 @@ public class WelcomeTest {
     private Welcome welcome;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         printStream = mock(PrintStream.class);
         welcome = new Welcome(printStream);
     }
