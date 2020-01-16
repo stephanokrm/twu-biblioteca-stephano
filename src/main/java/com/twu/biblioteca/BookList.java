@@ -1,19 +1,21 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.List;
 
 public class BookList {
     private PrintStream printStream;
-    private Library library;
+    private List<String> books;
+
     public static final String MESSAGE = "Books\n";
 
-    public BookList(PrintStream printStream, Library library) {
+    public BookList(PrintStream printStream, List<String> books) {
         this.printStream = printStream;
-        this.library = library;
+        this.books = books;
     }
 
     public void show() {
         printStream.println(MESSAGE);
-        library.listAllBooks();
+        printStream.println(String.join("\n", books));
     }
 }

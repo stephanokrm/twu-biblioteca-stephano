@@ -13,21 +13,23 @@ import static org.mockito.Mockito.verify;
 public class BookListTest {
     private PrintStream printStream;
     private BookList bookList;
-    private Library library;
+    private List<String> books;
 
     @Before
     public void setUp() {
-        List<String> books = new ArrayList<>();
-
+        books = new ArrayList<>();
         printStream = mock(PrintStream.class);
-        library = new Library(printStream, books);
-        bookList = new BookList(printStream, library);
+        bookList = new BookList(printStream, books);
     }
 
     @Test
-    public void shouldShowBookListLabel() {
+    public void shouldListAllLibraryBooks() {
+        books.add("Book 1");
+        books.add("Book 2");
+
         bookList.show();
 
         verify(printStream).println("Books\n");
+        verify(printStream).println("Book 1\nBook 2");
     }
 }
