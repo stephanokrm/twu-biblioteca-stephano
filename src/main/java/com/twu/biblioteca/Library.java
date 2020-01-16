@@ -13,6 +13,6 @@ public class Library {
     }
 
     public void listAllBooks() {
-        printStream.println("Book 1\nBook 2\n");
+        printStream.println(String.join("\n", books));
     }
 }

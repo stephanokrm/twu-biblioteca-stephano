@@ -25,10 +25,10 @@ public class LibraryTest {
     @Test
     public void shouldListAllLibraryBooks() {
         books.add("Book 1");
-        books.add("Book 2");
+        books.add("Book 3");
 
         library.listAllBooks();
 
-        verify(printStream).println("Book 1\nBook 2\n");
+        verify(printStream).println("Book 1\nBook 3");
     }
 }
