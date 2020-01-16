@@ -19,9 +19,9 @@ public class WelcomeTest {
     }
 
     @Test
-    public void shouldWelcomeMessage() {
+    public void shouldShowWelcomeMessage() {
         welcome.show();
 
-        verify(printStream).println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
+        verify(printStream).println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n");
     }
 }
