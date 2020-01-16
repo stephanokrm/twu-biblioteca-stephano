@@ -10,6 +10,6 @@ public class BookList {
     }
 
     public void show() {
-        printStream.println("Books:\n");
+        printStream.println("Books\n");
     }
 }
