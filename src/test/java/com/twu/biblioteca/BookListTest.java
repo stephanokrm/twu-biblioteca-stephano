@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 public class BookListTest {
     private PrintStream printStream;
     private BookList bookList;
-    private List<String> books;
+    private List<Book> books;
 
     @Before
     public void setUp() {
@@ -24,12 +24,15 @@ public class BookListTest {
 
     @Test
     public void shouldListAllLibraryBooks() {
-        books.add("Book 1");
-        books.add("Book 2");
+        Book book = new Book("Book 1", "Person 1", 2020);
+        books.add(book);
+
+        book = new Book("Book 2", "Person 2", 2020);
+        books.add(book);
 
         bookList.show();
 
         verify(printStream).println("Books\n");
-        verify(printStream).println("Book 1\nBook 2");
+        verify(printStream).println("Title: Book 1 | Author: Person 1 | Year: 2020\nTitle: Book 2 | Author: Person 2 | Year: 2020");
     }
 }
