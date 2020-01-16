@@ -36,6 +36,6 @@ public class BibliotecaAppTest {
         BibliotecaApp.main(null);
 
         verify(printStream).println(Welcome.MESSAGE);
-        verify(printStream).println("Books\n");
+        verify(printStream).println(BookList.MESSAGE);
     }
 }
