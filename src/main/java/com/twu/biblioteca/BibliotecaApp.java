@@ -8,7 +8,7 @@ public class BibliotecaApp {
         Welcome welcome = new Welcome(System.out);
         welcome.show();
 
-        List<String> books = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
         BookList bookList = new BookList(System.out, books);
         bookList.show();
     }
