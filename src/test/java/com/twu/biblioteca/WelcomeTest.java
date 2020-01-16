@@ -19,7 +19,7 @@ public class WelcomeTest {
     }
 
     @Test
-    public void shouldWelcomeMessageWhenIStartTheApplication() {
+    public void shouldWelcomeMessage() {
         welcome.show();
 
         verify(printStream).println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
