@@ -6,13 +6,13 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ListOfBooksOption {
+public class ListOfBooksOption extends MenuOption implements MenuOptionContract {
     private PrintStream printStream;
     private List<Book> books;
 
-    public static final String LABEL = "1. List of Books";
-
     public ListOfBooksOption(PrintStream printStream, List<Book> books) {
+        super(1, "List of Books");
+
         this.printStream = printStream;
         this.books = books;
     }

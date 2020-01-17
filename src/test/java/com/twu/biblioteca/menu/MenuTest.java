@@ -1,5 +1,7 @@
 package com.twu.biblioteca.menu;
 
+import com.twu.biblioteca.Book;
+import com.twu.biblioteca.menu.option.ListOfBooksOption;
 import com.twu.biblioteca.menu.option.MenuOption;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,5 +34,17 @@ public class MenuTest {
         menu.show();
 
         verify(printStream).println("1. Option");
+    }
+
+    @Test
+    public void shouldShowListOfBooksOption() {
+        List<Book> books = new ArrayList<>();
+        MenuOption listOfBooksOption = new ListOfBooksOption(printStream, books);
+
+        menuOptions.add(listOfBooksOption);
+
+        menu.show();
+
+        verify(printStream).println("1. List of Books");
     }
 }

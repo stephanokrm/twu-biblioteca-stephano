@@ -1,8 +1,8 @@
 package com.twu.biblioteca.menu.option;
 
 public class MenuOption {
-    protected int number;
-    protected String label;
+    private int number;
+    private String label;
 
     public MenuOption(int number, String label) {
         this.number = number;
