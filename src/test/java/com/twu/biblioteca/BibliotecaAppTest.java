@@ -36,6 +36,6 @@ public class BibliotecaAppTest {
         BibliotecaApp.main(null);
 
         verify(printStream).println(Welcome.MESSAGE);
-        verify(printStream).println(BookList.LABEL);
+        verify(printStream).println("- Menu");
     }
 }
