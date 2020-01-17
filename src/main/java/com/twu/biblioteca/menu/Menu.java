@@ -14,9 +14,15 @@ public class Menu {
         this.options = options;
     }
 
-    public void show() {
+    public void open() {
         printStream.println("- Menu");
-
         options.forEach(menuOption -> printStream.println(menuOption.toString()));
+    }
+
+    public void run(int option) {
+        options.stream()
+                .filter(menuOption -> menuOption.getNumber() == option)
+                .findFirst()
+                .ifPresent(MenuOption::show);
     }
 }

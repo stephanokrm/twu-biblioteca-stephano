@@ -1,6 +1,6 @@
 package com.twu.biblioteca.menu.option;
 
-public class MenuOption {
+public abstract class MenuOption {
     private int number;
     private String label;
 
@@ -8,6 +8,12 @@ public class MenuOption {
         this.number = number;
         this.label = label;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public abstract void show();
 
     @Override
     public String toString() {
