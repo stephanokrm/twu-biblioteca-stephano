@@ -1,5 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.menu.option;
 
+import com.twu.biblioteca.Book;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,16 +11,16 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class BookListTest {
+public class ListOfBooksOptionTest {
     private PrintStream printStream;
-    private BookList bookList;
+    private ListOfBooksOption listOfBooksOption;
     private List<Book> books;
 
     @Before
     public void setUp() {
         books = new ArrayList<>();
         printStream = mock(PrintStream.class);
-        bookList = new BookList(printStream, books);
+        listOfBooksOption = new ListOfBooksOption(printStream, books);
     }
 
     @Test
@@ -30,7 +31,7 @@ public class BookListTest {
         book = new Book("Book 2", "Person 2", 2020);
         books.add(book);
 
-        bookList.show();
+        listOfBooksOption.show();
 
         verify(printStream).println("Title: Book 1 | Author: Person 1 | Published Year: 2020\nTitle: Book 2 | Author: Person 2 | Published Year: 2020");
     }

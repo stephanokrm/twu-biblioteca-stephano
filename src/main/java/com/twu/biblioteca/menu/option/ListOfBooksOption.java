@@ -1,16 +1,18 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.menu.option;
+
+import com.twu.biblioteca.Book;
 
 import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BookList {
+public class ListOfBooksOption {
     private PrintStream printStream;
     private List<Book> books;
 
     public static final String LABEL = "1. List of Books";
 
-    public BookList(PrintStream printStream, List<Book> books) {
+    public ListOfBooksOption(PrintStream printStream, List<Book> books) {
         this.printStream = printStream;
         this.books = books;
     }
