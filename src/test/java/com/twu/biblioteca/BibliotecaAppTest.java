@@ -4,38 +4,46 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class BibliotecaAppTest {
-    private PrintStream printStream;
+    private final InputStream originalIn = System.in;
+    private PrintStream out;
     private final PrintStream originalOut = System.out;
 
     @Before
     public void setUp() {
-        printStream = mock(PrintStream.class);
-        System.setOut(printStream);
+        String option = "0";
+        ByteArrayInputStream in = new ByteArrayInputStream(option.getBytes());
+        System.setIn(in);
+
+        out = mock(PrintStream.class);
+        System.setOut(out);
     }
 
     @After
     public void tearDown() {
+        System.setIn(originalIn);
         System.setOut(originalOut);
     }
 
     @Test
-    public void shouldShowWelcomeMessageWhenIStartTheApplication() {
+    public void shouldShowTheWelcomeMessageWhenIStartTheApplication() {
         BibliotecaApp.main(null);
 
-        verify(printStream).println(Welcome.MESSAGE);
+        verify(out).println(Welcome.MESSAGE);
     }
 
     @Test
-    public void shouldListMenuAfterTheWelcomeMessageAppears() {
+    public void shouldShowTheMenuAfterTheWelcomeMessageAppears() {
         BibliotecaApp.main(null);
 
-        verify(printStream).println(Welcome.MESSAGE);
-        verify(printStream).println("- Menu");
+        verify(out).println(Welcome.MESSAGE);
+        verify(out).println("- Menu");
     }
 }

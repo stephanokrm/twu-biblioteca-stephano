@@ -6,6 +6,7 @@ import com.twu.biblioteca.menu.option.MenuOption;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BibliotecaApp {
     public static void main(String[] args) {
@@ -13,9 +14,15 @@ public class BibliotecaApp {
         welcome.show();
 
         List<MenuOption> menuOptions = new ArrayList<>();
-        menuOptions.add(new ListOfBooksOption(System.out, new ArrayList<>()));
+        ArrayList<Book> books = new ArrayList<>();
+        menuOptions.add(new ListOfBooksOption(System.out, books));
 
         Menu menu = new Menu(System.out, menuOptions);
         menu.open();
+
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+
+        menu.run(option);
     }
 }
