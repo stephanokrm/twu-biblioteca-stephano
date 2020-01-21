@@ -5,6 +5,7 @@ import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 
 import java.io.PrintStream;
+import java.util.InputMismatchException;
 
 public class Application {
     private final static String VERSION = "1.4";
@@ -41,7 +42,13 @@ public class Application {
         menu.boot();
         menu.open();
 
-        int option = question.ask("Enter an option: ");
+        int option;
+
+        try {
+            option = question.askForInteger("Enter an option: ");
+        } catch (InputMismatchException exception) {
+            throw new InvalidMenuOptionException();
+        }
 
         menu.run(option);
     }
