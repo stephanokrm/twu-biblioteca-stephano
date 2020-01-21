@@ -48,7 +48,7 @@ public class ApplicationTest extends TestCase {
 
     @Test
     public void run() throws InvalidMenuOptionException {
-        when(question.ask("Enter an option: ")).thenReturn(1);
+        when(question.askForInteger("Enter an option: ")).thenReturn(1);
 
         application.run();
 
