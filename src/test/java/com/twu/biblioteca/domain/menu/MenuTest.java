@@ -2,6 +2,7 @@ package com.twu.biblioteca.domain.menu;
 
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
+import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -39,5 +40,10 @@ public class MenuTest extends TestCase {
         menu.open();
 
         verify(out).println("- Menu\n");
+    }
+
+    @Test(expected = InvalidMenuOptionException.class)
+    public void notifyWhenChooseAnInvalidOption() throws InvalidMenuOptionException {
+        menu.run(-1);
     }
 }

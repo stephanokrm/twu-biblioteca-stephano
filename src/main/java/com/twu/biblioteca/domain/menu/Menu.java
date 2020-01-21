@@ -2,6 +2,7 @@ package com.twu.biblioteca.domain.menu;
 
 import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
 import com.twu.biblioteca.domain.menu.option.MenuOption;
+import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.repository.BookRepository;
 
 import java.io.PrintStream;
@@ -24,11 +25,12 @@ public class Menu {
                 .forEach(option -> out.println(option));
     }
 
-    public void run(int option) {
+    public void run(int option) throws InvalidMenuOptionException {
         options.stream()
                 .filter(menuOption -> menuOption.getNumber() == option)
                 .findFirst()
-                .ifPresent(MenuOption::show);
+                .orElseThrow(InvalidMenuOptionException::new)
+                .show();
     }
 
     public boolean isBooted() {

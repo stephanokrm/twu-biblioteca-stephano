@@ -2,6 +2,7 @@ package com.twu.biblioteca.foundation;
 
 import com.twu.biblioteca.domain.Welcome;
 import com.twu.biblioteca.domain.menu.Menu;
+import com.twu.biblioteca.exception.InvalidMenuOptionException;
 
 import java.io.PrintStream;
 
@@ -32,7 +33,7 @@ public class Application {
         return booted;
     }
 
-    public void run() {
+    public void run() throws InvalidMenuOptionException {
         Welcome welcome = new Welcome(out);
         welcome.show();
 
