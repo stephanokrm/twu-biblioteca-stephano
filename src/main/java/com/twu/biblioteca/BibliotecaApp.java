@@ -14,12 +14,8 @@ public class BibliotecaApp {
         try {
             application.boot();
             application.run();
-
-            System.exit(0);
         } catch (Exception exception) {
             out.println(exception.getMessage());
-
-            System.exit(1);
         }
     }
 }
