@@ -2,7 +2,6 @@ package com.twu.biblioteca.foundation;
 
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.Welcome;
-import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -47,11 +46,20 @@ public class ApplicationTest extends TestCase {
     }
 
     @Test
-    public void run() throws InvalidMenuOptionException {
-        when(question.askForInteger("Enter an option: ")).thenReturn(1);
+    public void run() {
+        when(question.askForInteger("Enter an option: ")).thenReturn(0);
 
         application.run();
 
         verify(out).println(Welcome.MESSAGE);
+    }
+
+    @Test
+    public void exitWhenInputZero() {
+        when(question.askForInteger("Enter an option: ")).thenReturn(0);
+
+        application.run();
+
+        assertThat(application.isRunning(), is(false));
     }
 }

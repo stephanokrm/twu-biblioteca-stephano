@@ -18,4 +18,8 @@ public class Question {
 
         return scanner.nextInt();
     }
+
+    public void clear() {
+        scanner.next();
+    }
 }
