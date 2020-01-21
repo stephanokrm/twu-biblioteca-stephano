@@ -1,26 +1,25 @@
 package com.twu.biblioteca.domain.menu.option;
 
+import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class ListOfBooksOptionTest {
+public class ListOfBooksOptionTest extends TestCase {
     private Menu menu;
-    private PrintStream out;
     private ListOfBooksOption listOfBooksOption;
     private BookRepository bookRepository;
 
-    @Before
+    @Override
     public void setUp() {
-        out = mock(PrintStream.class);
+        super.setUp();
+
         bookRepository = mock(BookRepository.class);
         listOfBooksOption = new ListOfBooksOption(out, bookRepository);
         menu = new Menu(out);

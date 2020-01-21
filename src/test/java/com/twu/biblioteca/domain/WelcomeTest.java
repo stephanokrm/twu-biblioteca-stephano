@@ -1,27 +1,24 @@
 package com.twu.biblioteca.domain;
 
-import org.junit.Before;
+import com.twu.biblioteca.TestCase;
 import org.junit.Test;
 
-import java.io.PrintStream;
-
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class WelcomeTest {
-    private PrintStream printStream;
+public class WelcomeTest extends TestCase {
     private Welcome welcome;
 
-    @Before
+    @Override
     public void setUp() {
-        printStream = mock(PrintStream.class);
-        welcome = new Welcome(printStream);
+        super.setUp();
+
+        welcome = new Welcome(out);
     }
 
     @Test
     public void shouldShowWelcomeMessage() {
         welcome.show();
 
-        verify(printStream).println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n");
+        verify(out).println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n");
     }
 }
