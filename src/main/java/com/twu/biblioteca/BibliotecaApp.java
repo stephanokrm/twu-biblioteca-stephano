@@ -1,15 +1,25 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.twu.biblioteca.foundation.Application;
+import com.twu.biblioteca.foundation.Question;
+
+import java.io.PrintStream;
 
 public class BibliotecaApp {
     public static void main(String[] args) {
-        Welcome welcome = new Welcome(System.out);
-        welcome.show();
+        PrintStream out = System.out;
+        Question question = new Question(System.out, System.in);
+        Application application = new Application(question, out);
 
-        List<Book> books = new ArrayList<>();
-        BookList bookList = new BookList(System.out, books);
-        bookList.show();
+        try {
+            application.boot();
+            application.run();
+
+            System.exit(0);
+        } catch (Exception exception) {
+            out.println(exception.getMessage());
+
+            System.exit(1);
+        }
     }
 }
