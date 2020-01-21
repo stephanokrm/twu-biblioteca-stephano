@@ -13,8 +13,12 @@ public class BibliotecaApp {
         Welcome welcome = new Welcome(System.out);
         welcome.show();
 
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("The Nickel Boys", "Colson Whitehead", 2019));
+        books.add(new Book("The Testaments", "Margaret Atwood", 2019));
+        books.add(new Book("The Topeka School", "Ben Lerner", 2019));
+
         List<MenuOption> menuOptions = new ArrayList<>();
-        ArrayList<Book> books = new ArrayList<>();
         menuOptions.add(new ListOfBooksOption(System.out, books));
 
         Menu menu = new Menu(System.out, menuOptions);
