@@ -2,6 +2,7 @@ package com.twu.biblioteca.foundation;
 
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.Welcome;
+import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -46,8 +47,8 @@ public class ApplicationTest extends TestCase {
     }
 
     @Test
-    public void run() {
-        when(question.ask("Enter an option: ")).thenReturn(0);
+    public void run() throws InvalidMenuOptionException {
+        when(question.askForInteger("Enter an option: ")).thenReturn(1);
 
         application.run();
 

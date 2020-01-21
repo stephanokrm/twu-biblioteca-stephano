@@ -13,7 +13,7 @@ public class Question {
         scanner = new Scanner(in);
     }
 
-    public int ask(String message) {
+    public int askForInteger(String message) {
         out.println(message);
 
         return scanner.nextInt();

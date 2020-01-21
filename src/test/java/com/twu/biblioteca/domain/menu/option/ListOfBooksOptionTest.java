@@ -2,6 +2,7 @@ package com.twu.biblioteca.domain.menu.option;
 
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
+import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class ListOfBooksOptionTest extends TestCase {
     }
 
     @Test
-    public void enterListOfBooksFromMenu() {
+    public void enterListOfBooksFromMenu() throws InvalidMenuOptionException {
         menu.run(1);
 
         verify(out).println("List of Books");
