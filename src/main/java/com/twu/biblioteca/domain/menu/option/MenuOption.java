@@ -1,4 +1,4 @@
-package com.twu.biblioteca.menu.option;
+package com.twu.biblioteca.domain.menu.option;
 
 public abstract class MenuOption {
     private int number;

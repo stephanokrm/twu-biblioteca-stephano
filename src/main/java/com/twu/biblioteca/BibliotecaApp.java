@@ -1,32 +1,25 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.menu.Menu;
-import com.twu.biblioteca.menu.option.ListOfBooksOption;
-import com.twu.biblioteca.menu.option.MenuOption;
+import com.twu.biblioteca.foundation.Application;
+import com.twu.biblioteca.foundation.Question;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.PrintStream;
 
 public class BibliotecaApp {
     public static void main(String[] args) {
-        Welcome welcome = new Welcome(System.out);
-        welcome.show();
+        PrintStream out = System.out;
+        Question question = new Question(System.out, System.in);
+        Application application = new Application(question, out);
 
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("The Nickel Boys", "Colson Whitehead", 2019));
-        books.add(new Book("The Testaments", "Margaret Atwood", 2019));
-        books.add(new Book("The Topeka School", "Ben Lerner", 2019));
+        try {
+            application.boot();
+            application.run();
 
-        List<MenuOption> menuOptions = new ArrayList<>();
-        menuOptions.add(new ListOfBooksOption(System.out, books));
+            System.exit(0);
+        } catch (Exception exception) {
+            out.println(exception.getMessage());
 
-        Menu menu = new Menu(System.out, menuOptions);
-        menu.open();
-
-        Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-
-        menu.run(option);
+            System.exit(1);
+        }
     }
 }
