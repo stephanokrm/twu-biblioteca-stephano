@@ -12,8 +12,6 @@ public class BibliotecaApp {
         try {
             Question question = new Question(System.out, System.in);
             Application application = new Application(question, out);
-
-            application.boot();
             application.run();
         } catch (Exception exception) {
             out.println(exception.getMessage());

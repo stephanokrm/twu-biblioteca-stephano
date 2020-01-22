@@ -31,21 +31,6 @@ public class ApplicationTest extends TestCase {
     }
 
     @Test
-    public void abort() throws RuntimeException {
-        expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("Runtime Error");
-
-        application.abort("Runtime Error");
-    }
-
-    @Test
-    public void boot() {
-        application.boot();
-
-        assertThat(application.isBooted(), is(true));
-    }
-
-    @Test
     public void run() {
         when(question.askForInteger("Enter an option: ")).thenReturn(0);
 

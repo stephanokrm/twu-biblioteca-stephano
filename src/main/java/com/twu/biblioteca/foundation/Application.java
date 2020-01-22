@@ -12,7 +12,6 @@ public class Application {
     private final static String VERSION = "1.6";
     private Question question;
     private PrintStream out;
-    private boolean booted = false;
     private boolean running = false;
 
     public Application(Question question, PrintStream out) {
@@ -22,18 +21,6 @@ public class Application {
 
     public String version() {
         return VERSION;
-    }
-
-    public void abort(String message) throws RuntimeException {
-        throw new RuntimeException(message);
-    }
-
-    public void boot() {
-        this.booted = true;
-    }
-
-    public boolean isBooted() {
-        return booted;
     }
 
     public void run() {
