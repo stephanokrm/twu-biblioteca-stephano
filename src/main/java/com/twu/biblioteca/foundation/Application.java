@@ -39,33 +39,45 @@ public class Application {
     public void run() {
         running = true;
 
-        Welcome welcome = new Welcome(out);
-        welcome.show();
+        showWelcome();
+        showMenu();
+    }
 
+    private void showMenu() {
         Menu menu = new Menu(out);
         menu.boot();
-
-        int option;
 
         do {
             menu.open();
 
             try {
-                option = question.askForInteger("Enter an option: ");
-
-                menu.run(option);
-
-                if (option == ExitOption.NUMBER) {
-                    running = false;
-                }
+                chooseOption(menu);
             } catch (InputMismatchException exception) {
-                out.println(InvalidMenuOptionException.MESSAGE);
+                handleError(InvalidMenuOptionException.MESSAGE);
             } catch (Exception exception) {
-                out.println(exception.getMessage());
+                handleError(exception.getMessage());
             }
-
-            question.clear();
         } while (isRunning());
+    }
+
+    private void handleError(String message) {
+        out.println(message);
+        question.clear();
+    }
+
+    private void chooseOption(Menu menu) throws InvalidMenuOptionException, InputMismatchException {
+        int option = question.askForInteger("Enter an option: ");
+
+        menu.run(option);
+
+        if (option == ExitOption.NUMBER) {
+            running = false;
+        }
+    }
+
+    private void showWelcome() {
+        Welcome welcome = new Welcome(out);
+        welcome.show();
     }
 
     public boolean isRunning() {
