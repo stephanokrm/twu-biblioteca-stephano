@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.verify;
 
-public class CheckoutABookTest extends TestCase {
+public class CheckoutABookOptionTest extends TestCase {
     private Menu menu;
     private CheckoutABookOption checkoutABookOption;
 
