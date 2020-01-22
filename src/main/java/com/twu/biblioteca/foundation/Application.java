@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import java.util.InputMismatchException;
 
 public class Application {
-    private final static String VERSION = "1.4";
+    private final static String VERSION = "1.6";
     private Question question;
     private PrintStream out;
     private boolean booted = false;
