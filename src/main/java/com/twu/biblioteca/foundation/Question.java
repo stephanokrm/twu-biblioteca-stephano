@@ -23,4 +23,8 @@ public class Question {
         scanner.next();
         out.flush();
     }
+
+    public Object askForString(String message) {
+        return "";
+    }
 }

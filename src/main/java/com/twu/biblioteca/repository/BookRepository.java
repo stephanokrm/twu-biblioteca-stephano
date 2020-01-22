@@ -14,4 +14,8 @@ public class BookRepository implements Repository<Book> {
 
         return books;
     }
+
+    public Book whereTitle(String title) {
+        return new Book("Title", "Author", 2020);
+    }
 }

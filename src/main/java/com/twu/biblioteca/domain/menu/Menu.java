@@ -1,11 +1,7 @@
 package com.twu.biblioteca.domain.menu;
 
-import com.twu.biblioteca.domain.menu.option.CheckoutABookOption;
-import com.twu.biblioteca.domain.menu.option.ExitOption;
-import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
 import com.twu.biblioteca.domain.menu.option.MenuOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
-import com.twu.biblioteca.repository.BookRepository;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -40,9 +36,6 @@ public class Menu {
     }
 
     public void boot() {
-        options.add(new ListOfBooksOption(out, new BookRepository()));
-        options.add(new CheckoutABookOption(out));
-        options.add(new ExitOption(out));
         booted = true;
     }
 
