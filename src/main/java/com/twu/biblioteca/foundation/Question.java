@@ -21,5 +21,6 @@ public class Question {
 
     public void clear() {
         scanner.next();
+        out.flush();
     }
 }
