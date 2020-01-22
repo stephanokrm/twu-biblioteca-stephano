@@ -41,7 +41,7 @@ public class Menu {
 
     public void boot() {
         options.add(new ListOfBooksOption(out, new BookRepository()));
-        options.add(new CheckoutABookOption());
+        options.add(new CheckoutABookOption(out));
         options.add(new ExitOption(out));
         booted = true;
     }
