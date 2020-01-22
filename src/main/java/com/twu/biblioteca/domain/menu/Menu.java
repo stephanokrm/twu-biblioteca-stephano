@@ -1,5 +1,6 @@
 package com.twu.biblioteca.domain.menu;
 
+import com.twu.biblioteca.domain.menu.option.ExitOption;
 import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
 import com.twu.biblioteca.domain.menu.option.MenuOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
@@ -39,6 +40,7 @@ public class Menu {
 
     public void boot() {
         options.add(new ListOfBooksOption(out, new BookRepository()));
+        options.add(new ExitOption(out));
         booted = true;
     }
 

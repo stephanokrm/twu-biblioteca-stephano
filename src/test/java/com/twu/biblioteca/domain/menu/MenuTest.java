@@ -1,6 +1,7 @@
 package com.twu.biblioteca.domain.menu;
 
 import com.twu.biblioteca.TestCase;
+import com.twu.biblioteca.domain.menu.option.ExitOption;
 import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import org.junit.Test;
@@ -27,12 +28,21 @@ public class MenuTest extends TestCase {
     }
 
     @Test
-    public void hasListOfBookListAfterBoot() {
+    public void hasListOfBookListOptionAfterBoot() {
         menu.boot();
 
         boolean hasListOfBooksOption = menu.hasOption(ListOfBooksOption.NUMBER);
 
         assertThat(hasListOfBooksOption, is(true));
+    }
+
+    @Test
+    public void hasExitAfterOptionBoot() {
+        menu.boot();
+
+        boolean hasExitOption = menu.hasOption(ExitOption.NUMBER);
+
+        assertThat(hasExitOption, is(true));
     }
 
     @Test
