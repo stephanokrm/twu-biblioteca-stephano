@@ -20,7 +20,7 @@ public class CheckoutABookOptionTest extends TestCase {
     }
 
     @Test
-    public void showExitOption() {
+    public void showCheckoutABookOption() {
         menu.open();
 
         verify(out).println("2. Checkout a Book");
