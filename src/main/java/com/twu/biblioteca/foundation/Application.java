@@ -41,6 +41,7 @@ public class Application {
                 chooseOption(menu);
             } catch (InputMismatchException exception) {
                 handleError(InvalidMenuOptionException.MESSAGE);
+                question.clear();
             } catch (Exception exception) {
                 handleError(exception.getMessage());
             }
@@ -49,7 +50,6 @@ public class Application {
 
     private void handleError(String message) {
         out.println(message);
-        question.clear();
     }
 
     private void chooseOption(Menu menu) throws InvalidMenuOptionException, InputMismatchException {
