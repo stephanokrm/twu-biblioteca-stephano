@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model;
 
-public class Book {
+public class Book implements Model {
     private String title;
     private String author;
     private int year;

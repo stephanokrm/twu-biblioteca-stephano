@@ -5,7 +5,7 @@ import com.twu.biblioteca.model.Book;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookRepository implements Repository {
+public class BookRepository implements Repository<Book> {
     public List<Book> all() {
         List<Book> books = new ArrayList<>();
         books.add(new Book("The Nickel Boys", "Colson Whitehead", 2019));
