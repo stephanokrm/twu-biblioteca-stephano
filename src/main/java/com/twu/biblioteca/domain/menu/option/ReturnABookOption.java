@@ -11,12 +11,14 @@ public class ReturnABookOption extends MenuOption {
     public static final int NUMBER = 3;
     public static final String LABEL = "Return a Book";
 
+    private PrintStream out;
     private Question question;
     private BookService bookService;
 
     public ReturnABookOption(PrintStream out, Question question, BookService bookService) {
         super(NUMBER, LABEL);
 
+        this.out = out;
         this.question = question;
         this.bookService = bookService;
     }
@@ -26,5 +28,6 @@ public class ReturnABookOption extends MenuOption {
         String title = question.askForString("Enter the book title: ");
         Book book = bookService.getBookByTitle(title);
         bookService.returnBook(book);
+        out.println("Thank you for returning the book");
     }
 }
