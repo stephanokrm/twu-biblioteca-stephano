@@ -53,4 +53,13 @@ public class BookServiceTest extends TestCase {
 
         assertThat(bookService.getBookByTitle("Book 1"), equalTo(book1));
     }
+
+    @Test
+    public void checkOutBook() {
+        Book book = new Book("Book 1", "Author", 2020, true);
+
+        bookService.checkOutBook(book);
+
+        assertThat(book.isAvailable(), is(false));
+    }
 }

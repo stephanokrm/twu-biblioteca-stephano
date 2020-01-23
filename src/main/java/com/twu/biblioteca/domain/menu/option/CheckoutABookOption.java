@@ -26,6 +26,6 @@ public class CheckoutABookOption extends MenuOption {
     public void show() {
         String title = question.askForString("Enter the book title: ");
         Book book = bookService.getBookByTitle(title);
-        book.setAvailable(false);
+        bookService.checkOutBook(book);
     }
 }

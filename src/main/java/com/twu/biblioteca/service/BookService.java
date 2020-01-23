@@ -27,4 +27,8 @@ public class BookService {
                 .findFirst()
                 .get();
     }
+
+    public void checkOutBook(Book book) {
+        book.setAvailable(false);
+    }
 }
