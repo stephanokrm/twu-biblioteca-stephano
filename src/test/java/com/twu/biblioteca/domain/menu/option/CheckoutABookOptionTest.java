@@ -17,9 +17,7 @@ import static org.mockito.Mockito.*;
 public class CheckoutABookOptionTest extends TestCase {
     private Menu menu;
     private Question question;
-    private BookService bookService;
     private BookRepository bookRepository;
-    private CheckoutABookOption checkoutABookOption;
 
     @Override
     public void setUp() {
@@ -27,8 +25,8 @@ public class CheckoutABookOptionTest extends TestCase {
 
         question = mock(Question.class);
         bookRepository = mock(BookRepository.class);
-        bookService = new BookService(bookRepository);
-        checkoutABookOption = new CheckoutABookOption(out, question, bookService);
+        BookService bookService = new BookService(bookRepository);
+        CheckoutABookOption checkoutABookOption = new CheckoutABookOption(out, question, bookService);
         menu = new Menu(out);
         menu.addOption(checkoutABookOption);
     }
@@ -53,5 +51,20 @@ public class CheckoutABookOptionTest extends TestCase {
         menu.run(CheckoutABookOption.NUMBER);
 
         verify(question).askForString("Enter the book title: ");
+    }
+
+    @Test
+    public void notifyWhenSuccessfullyCheckOutBook() throws InvalidMenuOptionException {
+        Book book = new Book("Title", "Author", 2020, true);
+
+        List<Book> books = new ArrayList<>();
+        books.add(book);
+
+        when(question.askForString("Enter the book title: ")).thenReturn("Title");
+        when(bookRepository.all()).thenReturn(books);
+
+        menu.run(CheckoutABookOption.NUMBER);
+
+        verify(out).println("Thank you! Enjoy the book");
     }
 }
