@@ -51,4 +51,19 @@ public class ReturnABookOptionTest extends TestCase {
 
         verify(question).askForString("Enter the book title: ");
     }
+
+    @Test
+    public void notifyWhenSuccessfullyReturnBook() throws Exception {
+        Book book = new Book("Title", "Author", 2020, false);
+
+        List<Book> books = new ArrayList<>();
+        books.add(book);
+
+        when(question.askForString("Enter the book title: ")).thenReturn("Title");
+        when(bookRepository.all()).thenReturn(books);
+
+        menu.run(ReturnABookOption.NUMBER);
+
+        verify(out).println("Thank you for returning the book");
+    }
 }
