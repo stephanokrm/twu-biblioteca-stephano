@@ -1,7 +1,8 @@
 package com.twu.biblioteca.domain.menu.option;
 
 import com.twu.biblioteca.foundation.Question;
-import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.service.BookService;
 
 import java.io.PrintStream;
 
@@ -11,16 +12,20 @@ public class CheckoutABookOption extends MenuOption {
 
     private PrintStream out;
     private Question question;
+    private BookService bookService;
 
-    public CheckoutABookOption(PrintStream out, Question question, BookRepository bookRepository) {
+    public CheckoutABookOption(PrintStream out, Question question, BookService bookService) {
         super(NUMBER, LABEL);
 
         this.out = out;
         this.question = question;
+        this.bookService = bookService;
     }
 
     @Override
     public void show() {
-        question.askForString("Enter the book title: ");
+        String title = question.askForString("Enter the book title: ");
+        Book book = bookService.getBookByTitle(title);
+        book.setAvailable(false);
     }
 }

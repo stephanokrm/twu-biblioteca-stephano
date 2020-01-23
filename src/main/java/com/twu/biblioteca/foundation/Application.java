@@ -35,10 +35,11 @@ public class Application {
     }
 
     private void showMenu() {
-        BookRepository bookRepository = new BookRepository();
+        BookService bookService = new BookService(new BookRepository());
+
         Menu menu = new Menu(out);
-        menu.addOption(new ListOfBooksOption(out, new BookService(bookRepository)));
-        menu.addOption(new CheckoutABookOption(out, question, bookRepository));
+        menu.addOption(new ListOfBooksOption(out, bookService));
+        menu.addOption(new CheckoutABookOption(out, question, bookService));
         menu.addOption(new ExitOption(out));
 
         do {

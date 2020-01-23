@@ -11,10 +11,11 @@ public class Question {
     public Question(PrintStream out, InputStream in) {
         this.out = out;
         scanner = new Scanner(in);
+        scanner.useDelimiter(System.lineSeparator());
     }
 
     public int askForInteger(String message) {
-        out.println(message);
+        out.print(message);
 
         return scanner.nextInt();
     }
@@ -24,7 +25,9 @@ public class Question {
         out.flush();
     }
 
-    public Object askForString(String message) {
-        return "";
+    public String askForString(String message) {
+        out.print(message);
+
+        return scanner.next();
     }
 }

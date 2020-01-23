@@ -16,8 +16,4 @@ public class BookRepository implements Repository<Book> {
     public List<Book> all() {
         return books;
     }
-
-    public Book whereTitle(String title) {
-        return new Book("Title", "Author", 2020);
-    }
 }
