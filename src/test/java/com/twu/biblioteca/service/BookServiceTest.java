@@ -70,6 +70,15 @@ public class BookServiceTest extends TestCase {
     }
 
     @Test
+    public void returnBook() {
+        Book book = new Book("Book 1", "Author", 2020, false);
+
+        bookService.returnBook(book);
+
+        assertThat(book.isAvailable(), is(true));
+    }
+
+    @Test
     public void throwExceptionWhenBookIsUnavailable() throws BookNotAvailableException {
         expectedException.expect(BookNotAvailableException.class);
         expectedException.expectMessage(BookNotAvailableException.MESSAGE);
