@@ -22,7 +22,7 @@ public class Menu {
                 .forEach(option -> out.println(option));
     }
 
-    public void run(int option) throws InvalidMenuOptionException {
+    public void run(int option) throws Exception {
         options.stream()
                 .filter(menuOption -> menuOption.getNumber() == option)
                 .findFirst()

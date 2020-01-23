@@ -1,9 +1,12 @@
 package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.TestCase;
+import com.twu.biblioteca.exception.BookNotAvailableException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class BookServiceTest extends TestCase {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     private BookRepository bookRepository;
     private BookService bookService;
 
@@ -40,7 +46,7 @@ public class BookServiceTest extends TestCase {
     }
 
     @Test
-    public void getBookByTitle() {
+    public void getBookByTitle() throws BookNotAvailableException {
         List<Book> books = new ArrayList<>();
 
         Book book1 = new Book("Book 1", "Author", 2020);
@@ -55,11 +61,33 @@ public class BookServiceTest extends TestCase {
     }
 
     @Test
-    public void checkOutBook() {
+    public void checkOutBook() throws BookNotAvailableException {
         Book book = new Book("Book 1", "Author", 2020, true);
 
         bookService.checkOutBook(book);
 
         assertThat(book.isAvailable(), is(false));
+    }
+
+    @Test
+    public void throwExceptionWhenBookIsUnavailable() throws BookNotAvailableException {
+        expectedException.expect(BookNotAvailableException.class);
+        expectedException.expectMessage("Sorry, that book is not available");
+
+        Book book = new Book("Book 1", "Author", 2020, false);
+
+        bookService.checkOutBook(book);
+    }
+
+    @Test
+    public void throwExceptionWhenBookIsNotFound() throws BookNotAvailableException {
+        expectedException.expect(BookNotAvailableException.class);
+        expectedException.expectMessage("Sorry, that book is not available");
+
+        List<Book> books = new ArrayList<>();
+
+        when(bookRepository.all()).thenReturn(books);
+
+        bookService.getBookByTitle("Book 1");
     }
 }

@@ -1,5 +1,6 @@
 package com.twu.biblioteca.service;
 
+import com.twu.biblioteca.exception.BookNotAvailableException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
 
@@ -20,15 +21,19 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public Book getBookByTitle(String title) {
+    public Book getBookByTitle(String title) throws BookNotAvailableException {
         return this.bookRepository.all()
                 .stream()
                 .filter(book -> book.getTitle().equals(title))
                 .findFirst()
-                .get();
+                .orElseThrow(BookNotAvailableException::new);
     }
 
-    public void checkOutBook(Book book) {
+    public void checkOutBook(Book book) throws BookNotAvailableException {
+        if (book.notAvailable()) {
+            throw new BookNotAvailableException();
+        }
+
         book.setAvailable(false);
     }
 }

@@ -2,7 +2,6 @@ package com.twu.biblioteca.domain.menu.option;
 
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
-import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
@@ -39,7 +38,7 @@ public class CheckoutABookOptionTest extends TestCase {
     }
 
     @Test
-    public void askForBookTitle() throws InvalidMenuOptionException {
+    public void askForBookTitle() throws Exception {
         Book book = new Book("Title", "Author", 2020);
 
         List<Book> books = new ArrayList<>();
@@ -54,7 +53,7 @@ public class CheckoutABookOptionTest extends TestCase {
     }
 
     @Test
-    public void notifyWhenSuccessfullyCheckOutBook() throws InvalidMenuOptionException {
+    public void notifyWhenSuccessfullyCheckOutBook() throws Exception {
         Book book = new Book("Title", "Author", 2020, true);
 
         List<Book> books = new ArrayList<>();

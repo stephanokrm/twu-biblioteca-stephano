@@ -60,7 +60,7 @@ public class Application {
         out.println(message);
     }
 
-    private void chooseOption(Menu menu) throws InvalidMenuOptionException, InputMismatchException {
+    private void chooseOption(Menu menu) throws Exception {
         int option = question.askForInteger("Enter an option: ");
 
         menu.run(option);

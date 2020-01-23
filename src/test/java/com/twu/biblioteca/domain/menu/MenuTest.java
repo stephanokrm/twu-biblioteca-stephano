@@ -24,7 +24,7 @@ public class MenuTest extends TestCase {
     }
 
     @Test(expected = InvalidMenuOptionException.class)
-    public void notifyWhenChooseAnInvalidOption() throws InvalidMenuOptionException {
+    public void notifyWhenChooseAnInvalidOption() throws Exception {
         menu.run(-1);
     }
 }
