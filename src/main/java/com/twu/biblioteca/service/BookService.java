@@ -1,6 +1,7 @@
 package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.exception.BookNotAvailableException;
+import com.twu.biblioteca.exception.InvalidBookException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
 
@@ -37,7 +38,11 @@ public class BookService {
         book.setAvailable(false);
     }
 
-    public void returnBook(Book book) {
+    public void returnBook(Book book) throws InvalidBookException {
+        if (book.isAvailable()) {
+            throw new InvalidBookException();
+        }
+
         book.setAvailable(true);
     }
 }

@@ -1,6 +1,7 @@
 package com.twu.biblioteca.domain.menu.option;
 
 import com.twu.biblioteca.exception.BookNotAvailableException;
+import com.twu.biblioteca.exception.InvalidBookException;
 import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.service.BookService;
@@ -24,9 +25,16 @@ public class ReturnABookOption extends MenuOption {
     }
 
     @Override
-    public void show() throws BookNotAvailableException {
+    public void show() throws InvalidBookException {
         String title = question.askForString("Enter the book title: ");
-        Book book = bookService.getBookByTitle(title);
+        Book book;
+
+        try {
+            book = bookService.getBookByTitle(title);
+        } catch (BookNotAvailableException exception) {
+            throw new InvalidBookException();
+        }
+
         bookService.returnBook(book);
         out.println("Thank you for returning the book");
     }

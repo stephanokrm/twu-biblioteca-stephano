@@ -39,7 +39,7 @@ public class ReturnABookOptionTest extends TestCase {
 
     @Test
     public void askForBookTitle() throws Exception {
-        Book book = new Book("Title", "Author", 2020);
+        Book book = new Book("Title", "Author", 2020, false);
 
         List<Book> books = new ArrayList<>();
         books.add(book);

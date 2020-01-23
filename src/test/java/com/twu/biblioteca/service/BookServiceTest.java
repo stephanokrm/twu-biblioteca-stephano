@@ -2,6 +2,7 @@ package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.exception.BookNotAvailableException;
+import com.twu.biblioteca.exception.InvalidBookException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
 import org.junit.Rule;
@@ -70,7 +71,7 @@ public class BookServiceTest extends TestCase {
     }
 
     @Test
-    public void returnBook() {
+    public void returnBook() throws InvalidBookException {
         Book book = new Book("Book 1", "Author", 2020, false);
 
         bookService.returnBook(book);
@@ -86,6 +87,16 @@ public class BookServiceTest extends TestCase {
         Book book = new Book("Book 1", "Author", 2020, false);
 
         bookService.checkOutBook(book);
+    }
+
+    @Test
+    public void throwExceptionWhenReturningAvailableBook() throws InvalidBookException {
+        expectedException.expect(InvalidBookException.class);
+        expectedException.expectMessage(InvalidBookException.MESSAGE);
+
+        Book book = new Book("Book 1", "Author", 2020, true);
+
+        bookService.returnBook(book);
     }
 
     @Test
