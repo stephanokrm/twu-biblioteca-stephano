@@ -9,12 +9,13 @@ import java.io.PrintStream;
 
 public class ReturnABookOption extends MenuOption {
     public static final int NUMBER = 3;
+    public static final String LABEL = "Return a Book";
 
     private Question question;
     private BookService bookService;
 
     public ReturnABookOption(PrintStream out, Question question, BookService bookService) {
-        super(NUMBER, "Return a Book");
+        super(NUMBER, LABEL);
 
         this.question = question;
         this.bookService = bookService;
