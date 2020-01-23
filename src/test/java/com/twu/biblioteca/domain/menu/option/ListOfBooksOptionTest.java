@@ -30,20 +30,23 @@ public class ListOfBooksOptionTest extends TestCase {
     }
 
     @Test
-    public void listAllBooks() {
+    public void listAvailableBooks() {
         List<Book> books = new ArrayList<>();
 
-        Book book = new Book("Book 1", "Person 1", 2020);
+        Book book = new Book("Book 1", "Person 1", 2020, true);
         books.add(book);
 
-        book = new Book("Book 2", "Person 2", 2020);
+        book = new Book("Book 2", "Person 2", 2020, false);
+        books.add(book);
+
+        book = new Book("Book 3", "Person 3", 2020, true);
         books.add(book);
 
         when(bookRepository.all()).thenReturn(books);
 
         listOfBooksOption.show();
 
-        verify(out).println("Title: Book 1 | Author: Person 1 | Published Year: 2020\nTitle: Book 2 | Author: Person 2 | Published Year: 2020");
+        verify(out).println("Title: Book 1 | Author: Person 1 | Published Year: 2020\nTitle: Book 3 | Author: Person 3 | Published Year: 2020");
     }
 
     @Test
