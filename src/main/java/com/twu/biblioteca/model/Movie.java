@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model;
 
-public class Movie {
+public class Movie implements Model {
     private String name;
     private int year;
     private String director;
