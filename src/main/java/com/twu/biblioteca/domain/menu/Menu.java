@@ -1,10 +1,7 @@
 package com.twu.biblioteca.domain.menu;
 
-import com.twu.biblioteca.domain.menu.option.ExitOption;
-import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
 import com.twu.biblioteca.domain.menu.option.MenuOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
-import com.twu.biblioteca.repository.BookRepository;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -12,7 +9,6 @@ import java.util.List;
 
 public class Menu {
     private PrintStream out;
-    private boolean booted = false;
     private List<MenuOption> options = new ArrayList<>();
 
     public Menu(PrintStream out) {
@@ -32,20 +28,6 @@ public class Menu {
                 .findFirst()
                 .orElseThrow(InvalidMenuOptionException::new)
                 .show();
-    }
-
-    public boolean isBooted() {
-        return booted;
-    }
-
-    public void boot() {
-        options.add(new ListOfBooksOption(out, new BookRepository()));
-        options.add(new ExitOption(out));
-        booted = true;
-    }
-
-    public boolean hasOption(int option) {
-        return options.stream().anyMatch(menuOption -> menuOption.getNumber() == option);
     }
 
     public void addOption(MenuOption menuOption) {
