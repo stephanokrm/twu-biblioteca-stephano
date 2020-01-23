@@ -9,8 +9,8 @@ public class ListOfBooksOption extends MenuOption {
     public static final int NUMBER = 1;
     public static final String LABEL = "List of Books";
 
-    private PrintStream out;
-    private BookService bookService;
+    private final PrintStream out;
+    private final BookService bookService;
 
     public ListOfBooksOption(PrintStream printStream, BookService bookService) {
         super(NUMBER, LABEL);
