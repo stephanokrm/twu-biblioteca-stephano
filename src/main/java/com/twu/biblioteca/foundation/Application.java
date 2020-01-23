@@ -7,6 +7,7 @@ import com.twu.biblioteca.domain.menu.option.ExitOption;
 import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.service.BookService;
 
 import java.io.PrintStream;
 import java.util.InputMismatchException;
@@ -36,7 +37,7 @@ public class Application {
     private void showMenu() {
         BookRepository bookRepository = new BookRepository();
         Menu menu = new Menu(out);
-        menu.addOption(new ListOfBooksOption(out, bookRepository));
+        menu.addOption(new ListOfBooksOption(out, new BookService(bookRepository)));
         menu.addOption(new CheckoutABookOption(out, question, bookRepository));
         menu.addOption(new ExitOption(out));
 

@@ -5,6 +5,7 @@ import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.service.BookService;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,15 +15,17 @@ import static org.mockito.Mockito.*;
 
 public class ListOfBooksOptionTest extends TestCase {
     private Menu menu;
-    private ListOfBooksOption listOfBooksOption;
+    private BookService bookService;
     private BookRepository bookRepository;
+    private ListOfBooksOption listOfBooksOption;
 
     @Override
     public void setUp() {
         super.setUp();
 
         bookRepository = mock(BookRepository.class);
-        listOfBooksOption = new ListOfBooksOption(out, bookRepository);
+        bookService = new BookService(bookRepository);
+        listOfBooksOption = new ListOfBooksOption(out, bookService);
         menu = new Menu(out);
         menu.addOption(listOfBooksOption);
     }
