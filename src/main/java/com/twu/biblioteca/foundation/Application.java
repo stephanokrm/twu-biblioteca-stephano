@@ -5,6 +5,7 @@ import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.domain.menu.option.CheckoutABookOption;
 import com.twu.biblioteca.domain.menu.option.ExitOption;
 import com.twu.biblioteca.domain.menu.option.ListOfBooksOption;
+import com.twu.biblioteca.domain.menu.option.ReturnABookOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.service.BookService;
@@ -13,7 +14,7 @@ import java.io.PrintStream;
 import java.util.InputMismatchException;
 
 public class Application {
-    private final static String VERSION = "1.8";
+    private final static String VERSION = "1.10";
     private Question question;
     private PrintStream out;
     private boolean running = false;
@@ -40,6 +41,7 @@ public class Application {
         Menu menu = new Menu(out);
         menu.addOption(new ListOfBooksOption(out, bookService));
         menu.addOption(new CheckoutABookOption(out, question, bookService));
+        menu.addOption(new ReturnABookOption(out, question, bookService));
         menu.addOption(new ExitOption(out));
 
         do {

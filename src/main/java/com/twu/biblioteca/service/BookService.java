@@ -36,4 +36,8 @@ public class BookService {
 
         book.setAvailable(false);
     }
+
+    public void returnBook(Book book) {
+        book.setAvailable(true);
+    }
 }
