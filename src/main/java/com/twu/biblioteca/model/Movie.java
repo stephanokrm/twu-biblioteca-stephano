@@ -19,9 +19,13 @@ public class Movie implements Model {
         return available;
     }
 
+    private String getMovieRating() {
+        return rating == 0 ? "Unrated" : Integer.toString(rating);
+    }
+
     @Override
     public String toString() {
-        String movieRating = rating == 0 ? "Unrated" : Integer.toString(rating);
+        String movieRating = getMovieRating();
 
         return String.format("Name: %s | Year: %d | Director: %s | Rating: %s", name, year, director, movieRating);
     }
