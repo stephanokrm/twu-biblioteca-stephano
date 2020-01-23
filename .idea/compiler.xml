@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Biblioteca" />
+        <module name="twu-biblioteca-stephano" />
       </profile>
     </annotationProcessing>
   </component>
