@@ -1,5 +1,6 @@
 package com.twu.biblioteca.domain.menu.option;
 
+import com.twu.biblioteca.exception.BookNotAvailableException;
 import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.service.BookService;
@@ -23,7 +24,7 @@ public class CheckoutABookOption extends MenuOption {
     }
 
     @Override
-    public void show() {
+    public void show() throws BookNotAvailableException {
         String title = question.askForString("Enter the book title: ");
         Book book = bookService.getBookByTitle(title);
         bookService.checkOutBook(book);

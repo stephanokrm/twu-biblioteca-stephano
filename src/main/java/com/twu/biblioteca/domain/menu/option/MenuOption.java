@@ -13,7 +13,7 @@ public abstract class MenuOption {
         return number;
     }
 
-    public abstract void show();
+    public abstract void show() throws Exception;
 
     @Override
     public String toString() {
