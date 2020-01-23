@@ -72,7 +72,7 @@ public class BookServiceTest extends TestCase {
     @Test
     public void throwExceptionWhenBookIsUnavailable() throws BookNotAvailableException {
         expectedException.expect(BookNotAvailableException.class);
-        expectedException.expectMessage("Sorry, that book is not available");
+        expectedException.expectMessage(BookNotAvailableException.MESSAGE);
 
         Book book = new Book("Book 1", "Author", 2020, false);
 
@@ -82,7 +82,7 @@ public class BookServiceTest extends TestCase {
     @Test
     public void throwExceptionWhenBookIsNotFound() throws BookNotAvailableException {
         expectedException.expect(BookNotAvailableException.class);
-        expectedException.expectMessage("Sorry, that book is not available");
+        expectedException.expectMessage(BookNotAvailableException.MESSAGE);
 
         List<Book> books = new ArrayList<>();
 
