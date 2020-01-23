@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Menu {
     private PrintStream out;
-    private boolean booted = false;
     private List<MenuOption> options = new ArrayList<>();
 
     public Menu(PrintStream out) {
@@ -29,18 +28,6 @@ public class Menu {
                 .findFirst()
                 .orElseThrow(InvalidMenuOptionException::new)
                 .show();
-    }
-
-    public boolean isBooted() {
-        return booted;
-    }
-
-    public void boot() {
-        booted = true;
-    }
-
-    public boolean hasOption(int option) {
-        return options.stream().anyMatch(menuOption -> menuOption.getNumber() == option);
     }
 
     public void addOption(MenuOption menuOption) {
