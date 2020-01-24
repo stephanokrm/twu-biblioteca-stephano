@@ -58,4 +58,14 @@ public class MovieServiceTest extends TestCase {
 
         assertThat(movieService.getMovieByName("Movie 1"), equalTo(movie1));
     }
+
+    @Test
+    public void checkOutMovie() {
+        Movie movie = new Movie("Movie 1", 2020, "Director 1", 10, true);
+
+        movieService.checkOutMovie(movie);
+
+        assertThat(movie.isAvailable(), is(false));
+    }
+
 }

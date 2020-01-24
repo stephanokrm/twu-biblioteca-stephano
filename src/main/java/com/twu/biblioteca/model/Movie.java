@@ -23,6 +23,10 @@ public class Movie implements Model {
         return available;
     }
 
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     private String getMovieRating() {
         return rating == 0 ? "Unrated" : Integer.toString(rating);
     }

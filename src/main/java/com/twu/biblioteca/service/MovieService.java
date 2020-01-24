@@ -27,4 +27,8 @@ public class MovieService {
                 .findFirst()
                 .get();
     }
+
+    public void checkOutMovie(Movie movie) {
+        movie.setAvailable(false);
+    }
 }
