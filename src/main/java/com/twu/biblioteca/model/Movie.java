@@ -15,6 +15,10 @@ public class Movie implements Model {
         this.available = available;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean isAvailable() {
         return available;
     }

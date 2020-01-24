@@ -19,4 +19,12 @@ public class MovieService {
                 .filter(Movie::isAvailable)
                 .collect(Collectors.toList());
     }
+
+    public Movie getMovieByName(String name) {
+        return this.movieRepository.all()
+                .stream()
+                .filter(book -> book.getName().equals(name))
+                .findFirst()
+                .get();
+    }
 }
