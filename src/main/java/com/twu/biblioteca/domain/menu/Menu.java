@@ -19,7 +19,7 @@ public class Menu {
         out.println("- Menu\n");
         options.stream()
                 .map(MenuOption::toString)
-                .forEach(option -> out.println(option));
+                .forEach(out::println);
     }
 
     public void run(int option) throws Exception {
