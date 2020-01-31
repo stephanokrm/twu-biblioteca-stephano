@@ -17,7 +17,7 @@ public class ListOfMoviesOption extends MenuOption {
     }
 
     @Override
-    public void show() throws Exception {
+    public void show() {
         out.println(LABEL);
 
         movieService.getAvailableMovies()

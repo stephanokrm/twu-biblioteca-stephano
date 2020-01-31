@@ -36,12 +36,14 @@ public class Application {
 
     private void showMenu() {
         BookService bookService = new BookService(new BookRepository());
+        MovieService movieService = new MovieService(new MovieRepository());
 
         Menu menu = new Menu(out);
         menu.addOption(new ListOfBooksOption(out, bookService));
         menu.addOption(new CheckoutABookOption(out, question, bookService));
         menu.addOption(new ReturnABookOption(out, question, bookService));
-        menu.addOption(new ListOfMoviesOption(out, new MovieService(new MovieRepository())));
+        menu.addOption(new ListOfMoviesOption(out, movieService));
+        menu.addOption(new CheckoutAMovieOption(out, question, movieService));
         menu.addOption(new ExitOption(out));
 
         do {

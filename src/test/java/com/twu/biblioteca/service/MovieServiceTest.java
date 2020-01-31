@@ -10,8 +10,7 @@ import org.junit.rules.ExpectedException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -44,4 +43,29 @@ public class MovieServiceTest extends TestCase {
 
         assertThat(movieService.getAvailableMovies(), not(hasItem(unavailableMovie)));
     }
+
+    @Test
+    public void getMovieByTitle() {
+        List<Movie> movies = new ArrayList<>();
+
+        Movie movie1 = new Movie("Movie 1", 2020, "Director 1", 10, false);
+        movies.add(movie1);
+
+        Movie movie2 = new Movie("Movie 2", 2020, "Director 2", 10, true);
+        movies.add(movie2);
+
+        when(movieRepository.all()).thenReturn(movies);
+
+        assertThat(movieService.getMovieByName("Movie 1"), equalTo(movie1));
+    }
+
+    @Test
+    public void checkOutMovie() {
+        Movie movie = new Movie("Movie 1", 2020, "Director 1", 10, true);
+
+        movieService.checkOutMovie(movie);
+
+        assertThat(movie.isAvailable(), is(false));
+    }
+
 }
