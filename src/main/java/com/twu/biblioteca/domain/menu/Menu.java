@@ -23,14 +23,18 @@ public class Menu {
     }
 
     public void run(int option) throws Exception {
-        options.stream()
-                .filter(menuOption -> menuOption.getNumber() == option)
-                .findFirst()
-                .orElseThrow(InvalidMenuOptionException::new)
-                .show();
+        MenuOption menuOption = getMenuByOption(option);
+        menuOption.show();
     }
 
     public void addOption(MenuOption menuOption) {
         this.options.add(menuOption);
+    }
+
+    public MenuOption getMenuByOption(int option) throws InvalidMenuOptionException {
+        return options.stream()
+                .filter(menuOption -> menuOption.getNumber() == option)
+                .findFirst()
+                .orElseThrow(InvalidMenuOptionException::new);
     }
 }
