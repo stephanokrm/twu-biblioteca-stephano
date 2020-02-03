@@ -2,8 +2,11 @@ package com.twu.biblioteca.domain.menu.option;
 
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
+import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class ExitOptionTest extends TestCase {
@@ -15,7 +18,8 @@ public class ExitOptionTest extends TestCase {
         super.setUp();
 
         exitOption = new ExitOption(out);
-        menu = new Menu(out);
+        UserRepository userRepository = mock(UserRepository.class);
+        menu = new Menu(out, new UserService(userRepository));
         menu.addOption(exitOption);
     }
 

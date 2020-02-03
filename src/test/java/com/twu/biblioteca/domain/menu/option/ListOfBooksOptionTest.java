@@ -4,7 +4,9 @@ import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -23,9 +25,10 @@ public class ListOfBooksOptionTest extends TestCase {
         super.setUp();
 
         bookRepository = mock(BookRepository.class);
+        UserRepository userRepository = mock(UserRepository.class);
         bookService = new BookService(bookRepository);
         listOfBooksOption = new ListOfBooksOption(out, bookService);
-        menu = new Menu(out);
+        menu = new Menu(out, new UserService(userRepository));
         menu.addOption(listOfBooksOption);
     }
 

@@ -3,11 +3,14 @@ package com.twu.biblioteca.domain.menu;
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.model.MenuOptionStub;
+import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class MenuTest extends TestCase {
@@ -17,7 +20,8 @@ public class MenuTest extends TestCase {
     public void setUp() {
         super.setUp();
 
-        menu = new Menu(out);
+        UserRepository userRepository = mock(UserRepository.class);
+        menu = new Menu(out, new UserService(userRepository));
     }
 
     @Test

@@ -2,17 +2,20 @@ package com.twu.biblioteca.domain.menu;
 
 import com.twu.biblioteca.domain.menu.option.MenuOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
+import com.twu.biblioteca.service.UserService;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    private PrintStream out;
+    private final PrintStream out;
+    private final UserService userService;
     private List<MenuOption> options = new ArrayList<>();
 
-    public Menu(PrintStream out) {
+    public Menu(PrintStream out, UserService userService) {
         this.out = out;
+        this.userService = userService;
     }
 
     public void open() {

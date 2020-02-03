@@ -6,8 +6,10 @@ import com.twu.biblioteca.domain.menu.option.*;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.repository.MovieRepository;
+import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.service.UserService;
 
 import java.io.PrintStream;
 import java.util.InputMismatchException;
@@ -38,7 +40,7 @@ public class Application {
         BookService bookService = new BookService(new BookRepository());
         MovieService movieService = new MovieService(new MovieRepository());
 
-        Menu menu = new Menu(out);
+        Menu menu = new Menu(out, new UserService(new UserRepository()));
         menu.addOption(new ListOfBooksOption(out, bookService));
         menu.addOption(new CheckoutABookOption(out, question, bookService));
         menu.addOption(new ReturnABookOption(out, question, bookService));
