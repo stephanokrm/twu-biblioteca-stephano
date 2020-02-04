@@ -41,7 +41,7 @@ public class MenuTest extends TestCase {
 
     @Test
     public void getMenuByOption() throws InvalidMenuOptionException {
-        MenuOptionStub menuOptionStub = new MenuOptionStub();
+        MenuOptionStub menuOptionStub = new MenuOptionStub(out);
         menu.addOption(menuOptionStub);
 
         assertThat(menu.getMenuByOption(MenuOptionStub.NUMBER), is(equalTo(menuOptionStub)));

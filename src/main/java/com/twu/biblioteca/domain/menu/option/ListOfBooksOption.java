@@ -9,13 +9,11 @@ public class ListOfBooksOption extends MenuOption {
     public static final int NUMBER = 1;
     public static final String LABEL = "List of Books";
 
-    private final PrintStream out;
     private final BookService bookService;
 
-    public ListOfBooksOption(PrintStream printStream, BookService bookService) {
-        super(NUMBER, LABEL);
+    public ListOfBooksOption(PrintStream out, BookService bookService) {
+        super(NUMBER, LABEL, out);
 
-        this.out = printStream;
         this.bookService = bookService;
     }
 

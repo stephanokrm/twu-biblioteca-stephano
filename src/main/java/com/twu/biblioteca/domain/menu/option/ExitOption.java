@@ -6,12 +6,8 @@ public class ExitOption extends MenuOption {
     public static final int NUMBER = 0;
     public static final String LABEL = "Exit";
 
-    private final PrintStream out;
-
-    public ExitOption(PrintStream printStream) {
-        super(NUMBER, LABEL);
-
-        this.out = printStream;
+    public ExitOption(PrintStream out) {
+        super(NUMBER, LABEL, out);
     }
 
     @Override
