@@ -19,8 +19,6 @@ public class ListOfMoviesOption extends MenuOption {
 
     @Override
     public void show() {
-        out.println(LABEL);
-
         movieService.getAvailableMovies()
                 .stream()
                 .map(Movie::toString)

@@ -35,7 +35,7 @@ public class CheckoutABookOptionTest extends TestCase {
         AuthService authService = new AuthService(userService);
         CheckoutABookOption checkoutABookOption = new CheckoutABookOption(out, question, bookService, authService);
 
-        authService.actingAs(new User("0", "0"));
+        authService.actingAs(new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000"));
         menu = new Menu(out, authService);
         menu.addOption(checkoutABookOption);
     }

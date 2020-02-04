@@ -79,7 +79,7 @@ public class BookServiceTest extends TestCase {
     @Test
     public void checkOutBook() throws BookNotAvailableException {
         Book book = new Book("Book 1", "Author", 2020, true);
-        User user = new User("xxx-xxxx", "0");
+        User user = new User("xxx-xxxx", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         bookService.checkOutBook(book, user);
 
@@ -89,7 +89,7 @@ public class BookServiceTest extends TestCase {
     @Test
     public void bookHasUserAfterCheckOut() throws BookNotAvailableException {
         Book book = new Book("Book 1", "Author", 2020, true);
-        User user = new User("xxx-xxxx", "0");
+        User user = new User("xxx-xxxx", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         bookService.checkOutBook(book, user);
 
@@ -111,7 +111,7 @@ public class BookServiceTest extends TestCase {
         expectedException.expectMessage(BookNotAvailableException.MESSAGE);
 
         Book book = new Book("Book 1", "Author", 2020, false);
-        User user = new User("xxx-xxxx", "0");
+        User user = new User("xxx-xxxx", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         bookService.checkOutBook(book, user);
     }

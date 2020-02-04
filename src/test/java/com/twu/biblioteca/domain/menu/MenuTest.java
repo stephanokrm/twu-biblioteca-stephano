@@ -31,7 +31,7 @@ public class MenuTest extends TestCase {
     public void openMenu() {
         menu.open();
 
-        verify(out).println("- Menu\n");
+        verify(out).println("\nMenu\n");
     }
 
     @Test(expected = InvalidMenuOptionException.class)

@@ -16,7 +16,7 @@ import java.io.PrintStream;
 import java.util.InputMismatchException;
 
 public class Application {
-    private final static String VERSION = "2.1";
+    private final static String VERSION = "2.4";
     private Question question;
     private PrintStream out;
     private boolean running = false;
@@ -51,6 +51,7 @@ public class Application {
         menu.addOption(new CheckoutAMovieOption(out, question, movieService));
         menu.addOption(new LoginOption(out, question, authService));
         menu.addOption(new ListOfUnavailableBooksOption(out, bookService));
+        menu.addOption(new MyInformationOption(out, authService));
         menu.addOption(new ExitOption(out));
 
         do {

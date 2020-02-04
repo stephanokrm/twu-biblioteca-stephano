@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserRepository implements Repository<User> {
     private static final List<User> users = new ArrayList<>(Arrays.asList(
-            new User("xxx-xxxx", "Password")
+            new User("xxx-xxxx", "Password", "Name", "email@gmail.com", "(00) 00000-0000")
     ));
 
     @Override

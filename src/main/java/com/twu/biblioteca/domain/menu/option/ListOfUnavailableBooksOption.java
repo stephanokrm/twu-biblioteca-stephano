@@ -19,8 +19,6 @@ public class ListOfUnavailableBooksOption extends MenuOption {
 
     @Override
     public void show() {
-        out.println(LABEL);
-
         bookService.getUnavailableBooks()
                 .stream()
                 .map(Book::toString)

@@ -66,6 +66,6 @@ public class ListOfMoviesOptionTest extends TestCase {
     public void enterListOfMoviesFromMenu() throws Exception {
         menu.run(4);
 
-        verify(out).println("List of Movies");
+        verify(out).printf("\n%s%n", "List of Movies");
     }
 }
