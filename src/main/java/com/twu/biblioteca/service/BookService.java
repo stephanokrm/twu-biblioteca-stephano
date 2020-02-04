@@ -3,6 +3,7 @@ package com.twu.biblioteca.service;
 import com.twu.biblioteca.exception.BookNotAvailableException;
 import com.twu.biblioteca.exception.InvalidBookException;
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.BookRepository;
 
 import java.util.List;
@@ -22,6 +23,14 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    public List<Book> getUnavailableBooks() {
+        return this.bookRepository
+                .all()
+                .stream()
+                .filter(Book::isNotAvailable)
+                .collect(Collectors.toList());
+    }
+
     public Book getBookByTitle(String title) throws BookNotAvailableException {
         return this.bookRepository.all()
                 .stream()
@@ -30,12 +39,13 @@ public class BookService {
                 .orElseThrow(BookNotAvailableException::new);
     }
 
-    public void checkOutBook(Book book) throws BookNotAvailableException {
-        if (book.notAvailable()) {
+    public void checkOutBook(Book book, User user) throws BookNotAvailableException {
+        if (book.isNotAvailable()) {
             throw new BookNotAvailableException();
         }
 
         book.setAvailable(false);
+        book.setRenter(user);
     }
 
     public void returnBook(Book book) throws InvalidBookException {

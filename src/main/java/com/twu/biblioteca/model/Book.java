@@ -1,9 +1,10 @@
 package com.twu.biblioteca.model;
 
 public class Book implements Model {
+    private int year;
+    private User renter;
     private String title;
     private String author;
-    private int year;
     private boolean available = true;
 
     public Book(String title, String author, int year) {
@@ -29,12 +30,22 @@ public class Book implements Model {
         this.available = available;
     }
 
-    public boolean notAvailable() {
+    public boolean isNotAvailable() {
         return !isAvailable();
     }
 
     @Override
     public String toString() {
-        return String.format("Title: %s | Author: %s | Published Year: %d", title, author, year);
+        return isAvailable()
+                ? String.format("Title: %s | Author: %s | Published Year: %d", title, author, year)
+                : String.format("Title: %s | Author: %s | Published Year: %d | Renter Library Number: %s", title, author, year, renter.getLibraryNumber());
+    }
+
+    public User getRenter() {
+        return renter;
+    }
+
+    public void setRenter(User renter) {
+        this.renter = renter;
     }
 }

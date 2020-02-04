@@ -4,6 +4,7 @@ import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.exception.BookNotAvailableException;
 import com.twu.biblioteca.exception.InvalidBookException;
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.BookRepository;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,6 +48,20 @@ public class BookServiceTest extends TestCase {
     }
 
     @Test
+    public void getUnavailableBooks() {
+        Book unavailableBook = new Book("Unavailable", "Author", 2020, false);
+        Book availableBook = new Book("Available", "Author", 2020);
+
+        List<Book> books = new ArrayList<>();
+        books.add(unavailableBook);
+        books.add(availableBook);
+
+        when(bookRepository.all()).thenReturn(books);
+
+        assertThat(bookService.getUnavailableBooks(), not(hasItem(availableBook)));
+    }
+
+    @Test
     public void getBookByTitle() throws BookNotAvailableException {
         List<Book> books = new ArrayList<>();
 
@@ -64,10 +79,21 @@ public class BookServiceTest extends TestCase {
     @Test
     public void checkOutBook() throws BookNotAvailableException {
         Book book = new Book("Book 1", "Author", 2020, true);
+        User user = new User("xxx-xxxx", "0");
 
-        bookService.checkOutBook(book);
+        bookService.checkOutBook(book, user);
 
         assertThat(book.isAvailable(), is(false));
+    }
+
+    @Test
+    public void bookHasUserAfterCheckOut() throws BookNotAvailableException {
+        Book book = new Book("Book 1", "Author", 2020, true);
+        User user = new User("xxx-xxxx", "0");
+
+        bookService.checkOutBook(book, user);
+
+        assertThat(book.getRenter(), is(equalTo(user)));
     }
 
     @Test
@@ -85,8 +111,9 @@ public class BookServiceTest extends TestCase {
         expectedException.expectMessage(BookNotAvailableException.MESSAGE);
 
         Book book = new Book("Book 1", "Author", 2020, false);
+        User user = new User("xxx-xxxx", "0");
 
-        bookService.checkOutBook(book);
+        bookService.checkOutBook(book, user);
     }
 
     @Test

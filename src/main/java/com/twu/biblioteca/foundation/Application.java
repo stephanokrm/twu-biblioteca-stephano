@@ -45,11 +45,12 @@ public class Application {
 
         Menu menu = new Menu(out, authService);
         menu.addOption(new ListOfBooksOption(out, bookService));
-        menu.addOption(new CheckoutABookOption(out, question, bookService));
+        menu.addOption(new CheckoutABookOption(out, question, bookService, authService));
         menu.addOption(new ReturnABookOption(out, question, bookService));
         menu.addOption(new ListOfMoviesOption(out, movieService));
         menu.addOption(new CheckoutAMovieOption(out, question, movieService));
         menu.addOption(new LoginOption(out, question, authService));
+        menu.addOption(new ListOfUnavailableBooksOption(out, bookService));
         menu.addOption(new ExitOption(out));
 
         do {
@@ -67,7 +68,7 @@ public class Application {
     }
 
     private void handleError(String message) {
-        out.println(message);
+        out.println(message == null ? "Unexpected Error" : message);
     }
 
     private void chooseOption(Menu menu) throws Exception {
