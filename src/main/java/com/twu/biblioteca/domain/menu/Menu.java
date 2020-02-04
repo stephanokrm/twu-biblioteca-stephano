@@ -21,6 +21,11 @@ public class Menu {
 
     public void open() {
         out.println("- Menu\n");
+
+        if (authService.isAuthenticated()) {
+            out.printf("Logged in as %s\n%n", authService.getUser().getLibraryNumber());
+        }
+
         options.stream()
                 .map(MenuOption::toString)
                 .forEach(out::println);
