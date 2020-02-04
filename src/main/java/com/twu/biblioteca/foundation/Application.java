@@ -16,7 +16,7 @@ import java.io.PrintStream;
 import java.util.InputMismatchException;
 
 public class Application {
-    private final static String VERSION = "2.1";
+    private final static String VERSION = "2.4";
     private Question question;
     private PrintStream out;
     private boolean running = false;

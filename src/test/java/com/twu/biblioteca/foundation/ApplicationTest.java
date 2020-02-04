@@ -27,7 +27,7 @@ public class ApplicationTest extends TestCase {
 
     @Test
     public void hasCurrentVersion() {
-        assertThat(application.version(), is(equalTo("2.1")));
+        assertThat(application.version(), is(equalTo("2.4")));
     }
 
     @Test
