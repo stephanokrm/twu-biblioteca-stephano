@@ -7,6 +7,7 @@ import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.repository.MovieRepository;
 import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
 import com.twu.biblioteca.service.UserService;
@@ -39,13 +40,16 @@ public class Application {
     private void showMenu() {
         BookService bookService = new BookService(new BookRepository());
         MovieService movieService = new MovieService(new MovieRepository());
+        UserService userService = new UserService(new UserRepository());
+        AuthService authService = new AuthService(userService);
 
-        Menu menu = new Menu(out, new UserService(new UserRepository()));
+        Menu menu = new Menu(out, authService);
         menu.addOption(new ListOfBooksOption(out, bookService));
         menu.addOption(new CheckoutABookOption(out, question, bookService));
         menu.addOption(new ReturnABookOption(out, question, bookService));
         menu.addOption(new ListOfMoviesOption(out, movieService));
         menu.addOption(new CheckoutAMovieOption(out, question, movieService));
+        menu.addOption(new LoginOption(out, question, authService));
         menu.addOption(new ExitOption(out));
 
         do {

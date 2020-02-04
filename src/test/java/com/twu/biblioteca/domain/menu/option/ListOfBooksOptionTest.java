@@ -5,6 +5,7 @@ import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
@@ -28,7 +29,9 @@ public class ListOfBooksOptionTest extends TestCase {
         UserRepository userRepository = mock(UserRepository.class);
         bookService = new BookService(bookRepository);
         listOfBooksOption = new ListOfBooksOption(out, bookService);
-        menu = new Menu(out, new UserService(userRepository));
+        UserService userService = new UserService(userRepository);
+
+        menu = new Menu(out, new AuthService(userService));
         menu.addOption(listOfBooksOption);
     }
 

@@ -3,6 +3,7 @@ package com.twu.biblioteca.domain.menu.option;
 import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
@@ -18,8 +19,11 @@ public class ExitOptionTest extends TestCase {
         super.setUp();
 
         exitOption = new ExitOption(out);
+
         UserRepository userRepository = mock(UserRepository.class);
-        menu = new Menu(out, new UserService(userRepository));
+        UserService userService = new UserService(userRepository);
+
+        menu = new Menu(out, new AuthService(userService));
         menu.addOption(exitOption);
     }
 

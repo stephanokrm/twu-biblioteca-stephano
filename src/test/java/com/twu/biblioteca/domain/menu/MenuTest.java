@@ -4,6 +4,7 @@ import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.model.MenuOptionStub;
 import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
@@ -21,7 +22,9 @@ public class MenuTest extends TestCase {
         super.setUp();
 
         UserRepository userRepository = mock(UserRepository.class);
-        menu = new Menu(out, new UserService(userRepository));
+        UserService userService = new UserService(userRepository);
+
+        menu = new Menu(out, new AuthService(userService));
     }
 
     @Test

@@ -16,7 +16,7 @@ public class CheckoutABookOption extends MenuOption {
     private final BookService bookService;
 
     public CheckoutABookOption(PrintStream out, Question question, BookService bookService) {
-        super(NUMBER, LABEL);
+        super(NUMBER, LABEL, true);
 
         this.out = out;
         this.question = question;
