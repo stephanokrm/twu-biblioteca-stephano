@@ -10,13 +10,14 @@ import java.io.PrintStream;
 
 public class ReturnABookOption extends MenuOption {
     public static final int NUMBER = 3;
+    public static final boolean GUARDED = true;
     public static final String LABEL = "Return a Book";
 
     private Question question;
     private BookService bookService;
 
     public ReturnABookOption(PrintStream out, Question question, BookService bookService) {
-        super(NUMBER, LABEL, out);
+        super(NUMBER, LABEL, out, GUARDED);
 
         this.question = question;
         this.bookService = bookService;

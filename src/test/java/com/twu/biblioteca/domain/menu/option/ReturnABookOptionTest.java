@@ -4,6 +4,7 @@ import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.AuthService;
@@ -30,10 +31,13 @@ public class ReturnABookOptionTest extends TestCase {
 
         UserRepository userRepository = mock(UserRepository.class);
         UserService userService = new UserService(userRepository);
+        AuthService authService = new AuthService(userService);
         BookService bookService = new BookService(bookRepository);
         ReturnABookOption returnABookOption = new ReturnABookOption(out, question, bookService);
 
-        menu = new Menu(out, new AuthService(userService));
+        authService.actingAs(new User("0", "0"));
+
+        menu = new Menu(out, authService);
         menu.addOption(returnABookOption);
     }
 
