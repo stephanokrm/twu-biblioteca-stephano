@@ -69,6 +69,6 @@ public class ListOfUnavailableBooksOptionTest extends TestCase {
     public void enterListOfBooksFromMenu() throws Exception {
         menu.run(7);
 
-        verify(out).println("List of Unavailable Books");
+        verify(out).printf("\n%s%n", "List of Unavailable Books");
     }
 }

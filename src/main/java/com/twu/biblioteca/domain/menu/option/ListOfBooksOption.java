@@ -18,8 +18,6 @@ public class ListOfBooksOption extends MenuOption {
     }
 
     public void show() {
-        out.println(LABEL);
-
         bookService.getAvailableBooks()
                 .stream()
                 .map(Book::toString)

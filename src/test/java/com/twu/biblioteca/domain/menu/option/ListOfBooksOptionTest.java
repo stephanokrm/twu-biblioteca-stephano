@@ -66,6 +66,6 @@ public class ListOfBooksOptionTest extends TestCase {
     public void enterListOfBooksFromMenu() throws Exception {
         menu.run(1);
 
-        verify(out).println("List of Books");
+        verify(out).printf("\n%s%n", "List of Books");
     }
 }

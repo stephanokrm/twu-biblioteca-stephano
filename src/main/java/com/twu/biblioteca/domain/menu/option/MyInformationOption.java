@@ -19,7 +19,6 @@ public class MyInformationOption extends MenuOption {
 
     @Override
     public void show() {
-        out.println(LABEL);
         out.println(authService.getUser().toString());
     }
 }

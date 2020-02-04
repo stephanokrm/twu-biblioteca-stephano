@@ -23,6 +23,12 @@ public abstract class MenuOption {
         return number;
     }
 
+    public void open() throws Exception {
+        out.printf("\n%s%n", label);
+
+        show();
+    }
+
     public abstract void show() throws Exception;
 
     @Override

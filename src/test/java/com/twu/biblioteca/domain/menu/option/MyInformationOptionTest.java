@@ -48,6 +48,6 @@ public class MyInformationOptionTest extends TestCase {
     public void enterMyInformationFromMenu() throws Exception {
         menu.run(8);
 
-        verify(out).println("My Information");
+        verify(out).printf("\n%s%n", "My Information");
     }
 }
