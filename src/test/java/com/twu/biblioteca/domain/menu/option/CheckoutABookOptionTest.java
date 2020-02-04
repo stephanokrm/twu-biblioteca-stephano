@@ -31,9 +31,9 @@ public class CheckoutABookOptionTest extends TestCase {
 
         UserRepository userRepository = mock(UserRepository.class);
         BookService bookService = new BookService(bookRepository);
-        CheckoutABookOption checkoutABookOption = new CheckoutABookOption(out, question, bookService);
         UserService userService = new UserService(userRepository);
         AuthService authService = new AuthService(userService);
+        CheckoutABookOption checkoutABookOption = new CheckoutABookOption(out, question, bookService, authService);
 
         authService.actingAs(new User("0", "0"));
         menu = new Menu(out, authService);
