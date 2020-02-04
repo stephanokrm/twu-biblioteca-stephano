@@ -6,12 +6,13 @@ import com.twu.biblioteca.service.MovieService;
 import java.io.PrintStream;
 
 public class ListOfMoviesOption extends MenuOption {
+    private final static int NUMBER = 4;
     private final static String LABEL = "List of Movies";
 
     private final MovieService movieService;
 
     public ListOfMoviesOption(PrintStream out, MovieService movieService) {
-        super(4, LABEL, out);
+        super(NUMBER, LABEL, out);
 
         this.movieService = movieService;
     }

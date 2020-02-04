@@ -8,12 +8,13 @@ import java.io.PrintStream;
 
 public class LoginOption extends MenuOption {
     public static final int NUMBER = 6;
+    public static final String LABEL = "Login";
 
     private final Question question;
     private final AuthService authService;
 
     public LoginOption(PrintStream out, Question question, AuthService authService) {
-        super(NUMBER, "Login", out);
+        super(NUMBER, LABEL, out);
 
         this.question = question;
         this.authService = authService;

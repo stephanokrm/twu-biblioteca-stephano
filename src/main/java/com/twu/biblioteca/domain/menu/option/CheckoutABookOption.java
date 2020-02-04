@@ -9,13 +9,14 @@ import java.io.PrintStream;
 
 public class CheckoutABookOption extends MenuOption {
     public static final int NUMBER = 2;
+    public static final boolean GUARDED = true;
     public static final String LABEL = "Checkout a Book";
 
     private final Question question;
     private final BookService bookService;
 
     public CheckoutABookOption(PrintStream out, Question question, BookService bookService) {
-        super(NUMBER, LABEL, out, true);
+        super(NUMBER, LABEL, out, GUARDED);
 
         this.question = question;
         this.bookService = bookService;
