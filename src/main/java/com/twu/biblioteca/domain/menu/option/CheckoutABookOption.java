@@ -9,16 +9,15 @@ import java.io.PrintStream;
 
 public class CheckoutABookOption extends MenuOption {
     public static final int NUMBER = 2;
+    public static final boolean GUARDED = true;
     public static final String LABEL = "Checkout a Book";
 
-    private final PrintStream out;
     private final Question question;
     private final BookService bookService;
 
     public CheckoutABookOption(PrintStream out, Question question, BookService bookService) {
-        super(NUMBER, LABEL);
+        super(NUMBER, LABEL, out, GUARDED);
 
-        this.out = out;
         this.question = question;
         this.bookService = bookService;
     }

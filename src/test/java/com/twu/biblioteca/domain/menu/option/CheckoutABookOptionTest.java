@@ -4,8 +4,12 @@ import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -24,9 +28,15 @@ public class CheckoutABookOptionTest extends TestCase {
 
         question = mock(Question.class);
         bookRepository = mock(BookRepository.class);
+
+        UserRepository userRepository = mock(UserRepository.class);
         BookService bookService = new BookService(bookRepository);
         CheckoutABookOption checkoutABookOption = new CheckoutABookOption(out, question, bookService);
-        menu = new Menu(out);
+        UserService userService = new UserService(userRepository);
+        AuthService authService = new AuthService(userService);
+
+        authService.actingAs(new User("0", "0"));
+        menu = new Menu(out, authService);
         menu.addOption(checkoutABookOption);
     }
 

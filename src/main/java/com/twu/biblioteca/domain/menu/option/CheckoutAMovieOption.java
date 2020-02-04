@@ -8,11 +8,14 @@ import java.io.PrintStream;
 
 public class CheckoutAMovieOption extends MenuOption {
     public static final int NUMBER = 5;
+    public static final String LABEL = "Checkout a Movie";
+
     private final Question question;
     private final MovieService movieService;
 
     public CheckoutAMovieOption(PrintStream out, Question question, MovieService movieService) {
-        super(NUMBER, "Checkout a Movie");
+        super(NUMBER, LABEL, out);
+
         this.question = question;
         this.movieService = movieService;
     }

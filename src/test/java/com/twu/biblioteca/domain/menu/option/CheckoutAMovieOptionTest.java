@@ -5,7 +5,10 @@ import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.repository.MovieRepository;
+import com.twu.biblioteca.repository.UserRepository;
+import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -24,9 +27,13 @@ public class CheckoutAMovieOptionTest extends TestCase {
 
         question = mock(Question.class);
         movieRepository = mock(MovieRepository.class);
+
+        UserRepository userRepository = mock(UserRepository.class);
         MovieService movieService = new MovieService(movieRepository);
+        UserService userService = new UserService(userRepository);
         CheckoutAMovieOption checkoutAMovieOption = new CheckoutAMovieOption(out, question, movieService);
-        menu = new Menu(out);
+
+        menu = new Menu(out, new AuthService(userService));
         menu.addOption(checkoutAMovieOption);
     }
 
