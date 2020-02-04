@@ -28,7 +28,7 @@ public class AuthServiceTest {
 
     @Test
     public void authenticate() throws AuthenticationException {
-        User user = new User("0", "0");
+        User user = new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         when(userService.getUserByLibraryNumber("0")).thenReturn(user);
 
@@ -42,7 +42,7 @@ public class AuthServiceTest {
         expectedException.expect(AuthenticationException.class);
         expectedException.expectMessage("These credentials do not match our records.");
 
-        User user = new User("0", "0");
+        User user = new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         when(userService.getUserByLibraryNumber("0")).thenReturn(user);
 
@@ -54,7 +54,7 @@ public class AuthServiceTest {
         expectedException.expect(AuthenticationException.class);
         expectedException.expectMessage("These credentials do not match our records.");
 
-        User user = new User("0", "0");
+        User user = new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         when(userService.getUserByLibraryNumber("0")).thenReturn(user);
 
@@ -63,7 +63,7 @@ public class AuthServiceTest {
 
     @Test
     public void canAccessAuthenticatedUserAfterLogin() throws AuthenticationException {
-        User user = new User("0", "0");
+        User user = new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         when(userService.getUserByLibraryNumber("0")).thenReturn(user);
 

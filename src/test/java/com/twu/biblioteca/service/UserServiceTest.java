@@ -26,7 +26,7 @@ public class UserServiceTest {
 
     @Test
     public void getUserByLibraryNumber() {
-        User user = new User("0", "0");
+        User user = new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         List<User> users = new ArrayList<>();
         users.add(user);

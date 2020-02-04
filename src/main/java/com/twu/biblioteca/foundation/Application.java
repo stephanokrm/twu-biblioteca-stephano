@@ -51,6 +51,7 @@ public class Application {
         menu.addOption(new CheckoutAMovieOption(out, question, movieService));
         menu.addOption(new LoginOption(out, question, authService));
         menu.addOption(new ListOfUnavailableBooksOption(out, bookService));
+        menu.addOption(new MyInformationOption(out, authService));
         menu.addOption(new ExitOption(out));
 
         do {

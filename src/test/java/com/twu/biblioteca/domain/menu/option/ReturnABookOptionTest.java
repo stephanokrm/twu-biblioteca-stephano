@@ -35,7 +35,7 @@ public class ReturnABookOptionTest extends TestCase {
         BookService bookService = new BookService(bookRepository);
         ReturnABookOption returnABookOption = new ReturnABookOption(out, question, bookService);
 
-        authService.actingAs(new User("0", "0"));
+        authService.actingAs(new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000"));
 
         menu = new Menu(out, authService);
         menu.addOption(returnABookOption);

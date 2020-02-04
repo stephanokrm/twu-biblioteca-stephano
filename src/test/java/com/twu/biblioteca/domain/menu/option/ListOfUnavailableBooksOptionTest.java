@@ -41,14 +41,14 @@ public class ListOfUnavailableBooksOptionTest extends TestCase {
         List<Book> books = new ArrayList<>();
 
         Book book = new Book("Book 1", "Person 1", 2020, false);
-        book.setRenter(new User("xxx-xxxx", "0"));
+        book.setRenter(new User("xxx-xxxx", "0", "Name", "email@gmail.com", "(00) 00000-0000"));
         books.add(book);
 
         book = new Book("Book 2", "Person 2", 2020, true);
         books.add(book);
 
         book = new Book("Book 3", "Person 3", 2020, false);
-        book.setRenter(new User("xxx-xxxx", "0"));
+        book.setRenter(new User("xxx-xxxx", "0", "Name", "email@gmail.com", "(00) 00000-0000"));
         books.add(book);
 
         when(bookRepository.all()).thenReturn(books);
