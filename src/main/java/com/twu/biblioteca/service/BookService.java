@@ -54,5 +54,6 @@ public class BookService {
         }
 
         book.setAvailable(true);
+        book.setRenter(null);
     }
 }

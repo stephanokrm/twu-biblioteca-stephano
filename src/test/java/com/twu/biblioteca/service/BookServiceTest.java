@@ -106,6 +106,17 @@ public class BookServiceTest extends TestCase {
     }
 
     @Test
+    public void bookHasNotUserAfterReturn() throws InvalidBookException {
+        User user = new User("xxx-xxxx", "0", "Name", "email@gmail.com", "(00) 00000-0000");
+        Book book = new Book("Book 1", "Author", 2020, false);
+        book.setRenter(user);
+
+        bookService.returnBook(book);
+
+        assertThat(book.getRenter(), is(nullValue()));
+    }
+
+    @Test
     public void throwExceptionWhenBookIsUnavailable() throws BookNotAvailableException {
         expectedException.expect(BookNotAvailableException.class);
         expectedException.expectMessage(BookNotAvailableException.MESSAGE);
