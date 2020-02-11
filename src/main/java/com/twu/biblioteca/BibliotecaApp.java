@@ -1,20 +1,21 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.foundation.Application;
-import com.twu.biblioteca.foundation.Question;
-
-import java.io.PrintStream;
+import com.twu.biblioteca.foundation.Console;
+import com.twu.biblioteca.foundation.Input;
+import com.twu.biblioteca.foundation.Output;
 
 public class BibliotecaApp {
     public static void main(String[] args) {
-        PrintStream out = System.out;
+        Output output = new Output(System.out);
 
         try {
-            Question question = new Question(System.out, System.in);
-            Application application = new Application(question, out);
+            Input input = new Input(System.in);
+            Console console = new Console(output, input);
+            Application application = new Application(console);
             application.run();
         } catch (Exception exception) {
-            out.println(exception.getMessage());
+            output.doWrite(exception.getMessage());
         }
     }
 }

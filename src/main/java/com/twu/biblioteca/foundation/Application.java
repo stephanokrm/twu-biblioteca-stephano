@@ -12,22 +12,12 @@ import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
 import com.twu.biblioteca.service.UserService;
 
-import java.io.PrintStream;
-import java.util.InputMismatchException;
-
 public class Application {
-    private final static String VERSION = "2.4";
-    private Question question;
-    private PrintStream out;
+    private final Console console;
     private boolean running = false;
 
-    public Application(Question question, PrintStream out) {
-        this.question = question;
-        this.out = out;
-    }
-
-    public String version() {
-        return VERSION;
+    public Application(Console console) {
+        this.console = console;
     }
 
     public void run() {
@@ -43,25 +33,24 @@ public class Application {
         UserService userService = new UserService(new UserRepository());
         AuthService authService = new AuthService(userService);
 
-        Menu menu = new Menu(out, authService);
-        menu.addOption(new ListOfBooksOption(out, bookService));
-        menu.addOption(new CheckoutABookOption(out, question, bookService, authService));
-        menu.addOption(new ReturnABookOption(out, question, bookService));
-        menu.addOption(new ListOfMoviesOption(out, movieService));
-        menu.addOption(new CheckoutAMovieOption(out, question, movieService));
-        menu.addOption(new LoginOption(out, question, authService));
-        menu.addOption(new ListOfUnavailableBooksOption(out, bookService));
-        menu.addOption(new MyInformationOption(out, authService));
-        menu.addOption(new ExitOption(out));
+        Menu menu = new Menu(console, authService);
+        menu.addOption(new ListOfBooksOption(console, bookService));
+        menu.addOption(new CheckoutABookOption(console, bookService, authService));
+        menu.addOption(new ReturnABookOption(console, bookService));
+        menu.addOption(new ListOfMoviesOption(console, movieService));
+        menu.addOption(new CheckoutAMovieOption(console, movieService));
+        menu.addOption(new LoginOption(console, authService));
+        menu.addOption(new ListOfUnavailableBooksOption(console, bookService));
+        menu.addOption(new MyInformationOption(console, authService));
+        menu.addOption(new ExitOption(console));
 
         do {
             menu.open();
 
             try {
                 chooseOption(menu);
-            } catch (InputMismatchException exception) {
+            } catch (NumberFormatException exception) {
                 handleError(InvalidMenuOptionException.MESSAGE);
-                question.clear();
             } catch (Exception exception) {
                 handleError(exception.getMessage());
             }
@@ -69,11 +58,13 @@ public class Application {
     }
 
     private void handleError(String message) {
-        out.println(message == null ? "Unexpected Error" : message);
+        console.doWrite(message == null ? "Unexpected Error" : message);
     }
 
     private void chooseOption(Menu menu) throws Exception {
-        int option = question.askForInteger("Enter an option: ");
+        String answer = console.askQuestion("Enter an option: ");
+
+        int option = Integer.parseInt(answer);
 
         menu.run(option);
 
@@ -83,7 +74,7 @@ public class Application {
     }
 
     private void showWelcome() {
-        Welcome welcome = new Welcome(out);
+        Welcome welcome = new Welcome(console);
         welcome.show();
     }
 

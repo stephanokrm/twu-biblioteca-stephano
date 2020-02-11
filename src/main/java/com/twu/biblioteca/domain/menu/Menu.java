@@ -3,32 +3,30 @@ package com.twu.biblioteca.domain.menu;
 import com.twu.biblioteca.domain.menu.option.LoginOption;
 import com.twu.biblioteca.domain.menu.option.MenuOption;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
+import com.twu.biblioteca.foundation.Console;
 import com.twu.biblioteca.service.AuthService;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    private final PrintStream out;
+    private final Console console;
     private final AuthService authService;
     private List<MenuOption> options = new ArrayList<>();
 
-    public Menu(PrintStream out, AuthService authService) {
-        this.out = out;
+    public Menu(Console console, AuthService authService) {
+        this.console = console;
         this.authService = authService;
     }
 
     public void open() {
-        out.println("\nMenu\n");
+        console.doWrite("Menu");
 
         if (authService.isAuthenticated()) {
-            out.printf("Logged in as %s\n%n", authService.getUser().getLibraryNumber());
+            console.doWrite(String.format("Logged in as %s", authService.getUser().getLibraryNumber()));
         }
 
-        options.stream()
-                .map(MenuOption::toString)
-                .forEach(out::println);
+        options.forEach(option -> console.doWrite(option.toString()));
     }
 
     public void run(int option) throws Exception {

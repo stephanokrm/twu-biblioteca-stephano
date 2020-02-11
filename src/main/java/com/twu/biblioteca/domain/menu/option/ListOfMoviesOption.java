@@ -1,9 +1,8 @@
 package com.twu.biblioteca.domain.menu.option;
 
+import com.twu.biblioteca.foundation.Console;
 import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.service.MovieService;
-
-import java.io.PrintStream;
 
 public class ListOfMoviesOption extends MenuOption {
     private final static int NUMBER = 4;
@@ -11,8 +10,8 @@ public class ListOfMoviesOption extends MenuOption {
 
     private final MovieService movieService;
 
-    public ListOfMoviesOption(PrintStream out, MovieService movieService) {
-        super(NUMBER, LABEL, out);
+    public ListOfMoviesOption(Console console, MovieService movieService) {
+        super(NUMBER, LABEL, console);
 
         this.movieService = movieService;
     }
@@ -23,6 +22,6 @@ public class ListOfMoviesOption extends MenuOption {
                 .stream()
                 .map(Movie::toString)
                 .reduce((accumulator, movie) -> String.format("%s\n%s", accumulator, movie))
-                .ifPresent(out::println);
+                .ifPresent(console::doWrite);
     }
 }

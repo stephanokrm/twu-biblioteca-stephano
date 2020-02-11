@@ -1,16 +1,16 @@
 package com.twu.biblioteca.domain;
 
-import java.io.PrintStream;
+import com.twu.biblioteca.foundation.Console;
 
 public class Welcome {
-    private PrintStream printStream;
-    public static final String MESSAGE = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n";
+    public static final String MESSAGE = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
+    private final Console console;
 
-    public Welcome(PrintStream printStream) {
-        this.printStream = printStream;
+    public Welcome(Console console) {
+        this.console = console;
     }
 
     public void show() {
-        printStream.println(MESSAGE);
+        console.doWrite(MESSAGE);
     }
 }

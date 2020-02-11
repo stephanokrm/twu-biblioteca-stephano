@@ -1,6 +1,6 @@
 package com.twu.biblioteca.domain.menu;
 
-import com.twu.biblioteca.TestCase;
+import com.twu.biblioteca.InteractsWithConsole;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.model.MenuOptionStub;
 import com.twu.biblioteca.repository.UserRepository;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class MenuTest extends TestCase {
+public class MenuTest extends InteractsWithConsole {
     private Menu menu;
 
     @Override
@@ -24,14 +24,14 @@ public class MenuTest extends TestCase {
         UserRepository userRepository = mock(UserRepository.class);
         UserService userService = new UserService(userRepository);
 
-        menu = new Menu(out, new AuthService(userService));
+        menu = new Menu(console, new AuthService(userService));
     }
 
     @Test
     public void openMenu() {
         menu.open();
 
-        verify(out).println("\nMenu\n");
+        verify(console).doWrite("Menu");
     }
 
     @Test(expected = InvalidMenuOptionException.class)
@@ -41,7 +41,7 @@ public class MenuTest extends TestCase {
 
     @Test
     public void getMenuByOption() throws InvalidMenuOptionException {
-        MenuOptionStub menuOptionStub = new MenuOptionStub(out);
+        MenuOptionStub menuOptionStub = new MenuOptionStub(console);
         menu.addOption(menuOptionStub);
 
         assertThat(menu.getMenuByOption(MenuOptionStub.NUMBER), is(equalTo(menuOptionStub)));

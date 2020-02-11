@@ -1,11 +1,11 @@
 package com.twu.biblioteca.service;
 
-import com.twu.biblioteca.TestCase;
 import com.twu.biblioteca.exception.BookNotAvailableException;
 import com.twu.biblioteca.exception.InvalidBookException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.BookRepository;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -18,17 +18,15 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class BookServiceTest extends TestCase {
+public class BookServiceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
     private BookRepository bookRepository;
     private BookService bookService;
 
-    @Override
+    @Before
     public void setUp() {
-        super.setUp();
-
         bookRepository = mock(BookRepository.class);
         bookService = new BookService(bookRepository);
     }
@@ -44,6 +42,7 @@ public class BookServiceTest extends TestCase {
 
         when(bookRepository.all()).thenReturn(books);
 
+        assertThat(bookService.getAvailableBooks(), hasItem(availableBook));
         assertThat(bookService.getAvailableBooks(), not(hasItem(unavailableBook)));
     }
 
@@ -58,6 +57,7 @@ public class BookServiceTest extends TestCase {
 
         when(bookRepository.all()).thenReturn(books);
 
+        assertThat(bookService.getUnavailableBooks(), hasItem(unavailableBook));
         assertThat(bookService.getUnavailableBooks(), not(hasItem(availableBook)));
     }
 
