@@ -57,9 +57,10 @@ public class ReturnABookOptionTest extends InteractsWithConsole {
 
         when(bookRepository.all()).thenReturn(books);
 
-        expectsOutput("Return a Book")
+        option(returnABookOption)
+                .expectsOutput("Return a Book")
                 .expectsQuestion("Enter the book title: ", "Title")
                 .expectsOutput("Thank you for returning the book")
-                .execute(returnABookOption);
+                .execute();
     }
 }

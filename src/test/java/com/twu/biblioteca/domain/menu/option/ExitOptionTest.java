@@ -36,7 +36,8 @@ public class ExitOptionTest extends InteractsWithConsole {
 
     @Test
     public void runExitOption() throws Exception {
-        expectsOutput("Exit")
-                .execute(exitOption);
+        option(exitOption)
+                .expectsOutput("Exit")
+                .execute();
     }
 }

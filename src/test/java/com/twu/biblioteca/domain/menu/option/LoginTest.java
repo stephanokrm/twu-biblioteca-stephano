@@ -32,9 +32,10 @@ public class LoginTest extends InteractsWithConsole {
 
     @Test
     public void runLogin() throws Exception {
-        expectsOutput("Login")
+        option(loginOption)
+                .expectsOutput("Login")
                 .expectsQuestion("Enter your library number: ", "Library Number")
                 .expectsQuestion("Enter your password: ", "Password")
-                .execute(loginOption);
+                .execute();
     }
 }

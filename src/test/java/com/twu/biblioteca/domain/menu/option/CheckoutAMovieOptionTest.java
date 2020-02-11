@@ -53,8 +53,9 @@ public class CheckoutAMovieOptionTest extends InteractsWithConsole {
 
         when(movieRepository.all()).thenReturn(movies);
 
-        expectsOutput("Checkout a Movie")
+        option(checkoutAMovieOption)
+                .expectsOutput("Checkout a Movie")
                 .expectsQuestion("Enter the movie name: ", "Name")
-                .execute(checkoutAMovieOption);
+                .execute();
     }
 }

@@ -57,9 +57,10 @@ public class CheckoutABookOptionTest extends InteractsWithConsole {
 
         when(bookRepository.all()).thenReturn(books);
 
-        expectsOutput("Checkout a Book")
+        option(checkoutABookOption)
+                .expectsOutput("Checkout a Book")
                 .expectsQuestion("Enter the book title: ", "Title")
                 .expectsOutput("Thank you! Enjoy the book")
-                .execute(checkoutABookOption);
+                .execute();
     }
 }

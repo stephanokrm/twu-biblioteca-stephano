@@ -59,8 +59,9 @@ public class ListOfBooksOptionTest extends InteractsWithConsole {
 
         when(bookRepository.all()).thenReturn(books);
 
-        expectsOutput("List of Books")
+        option(listOfBooksOption)
+                .expectsOutput("List of Books")
                 .expectsOutput("Title: Book 1 | Author: Person 1 | Published Year: 2020\nTitle: Book 3 | Author: Person 3 | Published Year: 2020")
-                .execute(listOfBooksOption);
+                .execute();
     }
 }

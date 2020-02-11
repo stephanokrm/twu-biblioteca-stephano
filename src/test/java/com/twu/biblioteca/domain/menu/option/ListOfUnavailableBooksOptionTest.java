@@ -62,8 +62,9 @@ public class ListOfUnavailableBooksOptionTest extends InteractsWithConsole {
 
         when(bookRepository.all()).thenReturn(books);
 
-        expectsOutput("List of Unavailable Books")
+        option(listOfUnavailableBooksOption)
+                .expectsOutput("List of Unavailable Books")
                 .expectsOutput("Title: Book 1 | Author: Person 1 | Published Year: 2020 | Renter Library Number: xxx-xxxx\nTitle: Book 3 | Author: Person 3 | Published Year: 2020 | Renter Library Number: xxx-xxxx")
-                .execute(listOfUnavailableBooksOption);
+                .execute();
     }
 }

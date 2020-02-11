@@ -39,8 +39,9 @@ public class MyInformationOptionTest extends InteractsWithConsole {
 
     @Test
     public void runMyInformationOption() throws Exception {
-        expectsOutput("My Information")
+        option(myInformationOption)
+                .expectsOutput("My Information")
                 .expectsOutput("Name: Name | Email: email@gmail.com | Phone Number: (00) 00000-0000")
-                .execute(myInformationOption);
+                .execute();
     }
 }

@@ -59,8 +59,9 @@ public class ListOfMoviesOptionTest extends InteractsWithConsole {
 
         when(movieRepository.all()).thenReturn(movies);
 
-        expectsOutput("List of Movies")
+        option(listOfMoviesOption)
+                .expectsOutput("List of Movies")
                 .expectsOutput("Name: Movie 1 | Year: 2020 | Director: Director 1 | Rating: 10\nName: Movie 3 | Year: 2020 | Director: Director 3 | Rating: 5")
-                .execute(listOfMoviesOption);
+                .execute();
     }
 }
