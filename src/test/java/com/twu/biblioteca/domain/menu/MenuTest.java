@@ -9,7 +9,6 @@ import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +16,18 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class MenuTest extends InteractsWithConsole {
     private Menu menu;
-    @Mock
-    UserRepository userRepository;
+    private UserRepository userRepository;
     private AuthService authService;
 
     @Override
     public void setUp() {
         super.setUp();
+
+        userRepository = mock(UserRepository.class);
 
         UserService userService = new UserService(userRepository);
 

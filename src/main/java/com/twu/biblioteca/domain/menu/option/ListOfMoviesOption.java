@@ -18,7 +18,8 @@ public class ListOfMoviesOption extends MenuOption {
 
     @Override
     public void show() {
-        movieService.getAvailableMovies()
+        movieService
+                .getAvailableMovies()
                 .stream()
                 .map(Movie::toString)
                 .reduce((accumulator, movie) -> String.format("%s\n%s", accumulator, movie))

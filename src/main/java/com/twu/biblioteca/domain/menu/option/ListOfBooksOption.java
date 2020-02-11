@@ -17,7 +17,8 @@ public class ListOfBooksOption extends MenuOption {
     }
 
     public void show() {
-        bookService.getAvailableBooks()
+        bookService
+                .getAvailableBooks()
                 .stream()
                 .map(Book::toString)
                 .reduce((accumulator, book) -> String.format("%s\n%s", accumulator, book))

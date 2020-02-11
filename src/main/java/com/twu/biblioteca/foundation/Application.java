@@ -5,12 +5,10 @@ import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.domain.menu.option.*;
 import com.twu.biblioteca.exception.InvalidMenuOptionException;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.CheckoutRepository;
 import com.twu.biblioteca.repository.MovieRepository;
 import com.twu.biblioteca.repository.UserRepository;
-import com.twu.biblioteca.service.AuthService;
-import com.twu.biblioteca.service.BookService;
-import com.twu.biblioteca.service.MovieService;
-import com.twu.biblioteca.service.UserService;
+import com.twu.biblioteca.service.*;
 
 public class Application {
     private final Console console;
@@ -28,19 +26,26 @@ public class Application {
     }
 
     private void showMenu() {
-        BookService bookService = new BookService(new BookRepository());
-        MovieService movieService = new MovieService(new MovieRepository());
-        UserService userService = new UserService(new UserRepository());
+        BookRepository bookRepository = new BookRepository();
+        UserRepository userRepository = new UserRepository();
+        MovieRepository movieRepository = new MovieRepository();
+        CheckoutRepository checkoutRepository = new CheckoutRepository();
+        CheckoutBookService checkoutBookService = new CheckoutBookService(checkoutRepository);
+        CheckoutMovieService checkoutMovieService = new CheckoutMovieService(checkoutRepository);
+
+        UserService userService = new UserService(userRepository);
         AuthService authService = new AuthService(userService);
+        BookService bookService = new BookService(bookRepository, checkoutBookService);
+        MovieService movieService = new MovieService(movieRepository, checkoutMovieService);
 
         Menu menu = new Menu(console, authService);
         menu.addOption(new ListOfBooksOption(console, bookService));
-        menu.addOption(new CheckoutABookOption(console, bookService, authService));
-        menu.addOption(new ReturnABookOption(console, bookService));
+        menu.addOption(new CheckoutABookOption(console, bookService, checkoutBookService, authService));
+        menu.addOption(new ReturnABookOption(console, bookService, checkoutBookService));
         menu.addOption(new ListOfMoviesOption(console, movieService));
-        menu.addOption(new CheckoutAMovieOption(console, movieService));
+        menu.addOption(new CheckoutAMovieOption(console, movieService, checkoutMovieService, authService));
         menu.addOption(new LoginOption(console, authService));
-        menu.addOption(new ListOfUnavailableBooksOption(console, bookService));
+        menu.addOption(new ListOfUnavailableBooksOption(console, checkoutBookService));
         menu.addOption(new MyInformationOption(console, authService));
         menu.addOption(new ExitOption(console));
 

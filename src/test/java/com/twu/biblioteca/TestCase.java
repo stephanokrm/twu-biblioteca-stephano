@@ -2,26 +2,14 @@ package com.twu.biblioteca;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.MockitoRule;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.mockito.Mockito.mock;
+
 public abstract class TestCase {
-    @Rule
-    public MockitoRule initRule = MockitoJUnit.rule();
-
-    @Mock
     protected PrintStream out;
-
-    @Mock
     protected InputStream in;
 
     private PrintStream originalOut;
@@ -29,10 +17,11 @@ public abstract class TestCase {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         originalIn = System.in;
         originalOut = System.out;
+
+        in = mock(InputStream.class);
+        out = mock(PrintStream.class);
 
         System.setIn(in);
         System.setOut(out);

@@ -14,11 +14,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AuthServiceTest {
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     private AuthService authService;
     private UserService userService;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() {
