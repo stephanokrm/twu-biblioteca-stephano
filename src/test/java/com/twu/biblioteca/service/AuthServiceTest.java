@@ -27,7 +27,7 @@ public class AuthServiceTest {
     }
 
     @Test
-    public void authenticate() throws AuthenticationException {
+    public void checkIfIsAuthenticated() throws AuthenticationException {
         User user = new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000");
 
         when(userService.getUserByLibraryNumber("0")).thenReturn(user);
@@ -35,6 +35,17 @@ public class AuthServiceTest {
         authService.authenticate("0", "0");
 
         assertThat(authService.isAuthenticated(), is(true));
+    }
+
+    @Test
+    public void checkIfIsNotAuthenticated() throws AuthenticationException {
+        User user = new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000");
+
+        when(userService.getUserByLibraryNumber("0")).thenReturn(user);
+
+        authService.authenticate("0", "0");
+
+        assertThat(authService.isNotAuthenticated(), is(false));
     }
 
     @Test

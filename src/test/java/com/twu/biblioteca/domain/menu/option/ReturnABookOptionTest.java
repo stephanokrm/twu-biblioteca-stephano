@@ -2,6 +2,7 @@ package com.twu.biblioteca.domain.menu.option;
 
 import com.twu.biblioteca.InteractsWithConsole;
 import com.twu.biblioteca.domain.menu.Menu;
+import com.twu.biblioteca.exception.InvalidBookException;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.BookRepository;
@@ -9,7 +10,9 @@ import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.UserService;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
@@ -18,6 +21,9 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 public class ReturnABookOptionTest extends InteractsWithConsole {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     private Menu menu;
     private ReturnABookOption returnABookOption;
 
@@ -62,5 +68,19 @@ public class ReturnABookOptionTest extends InteractsWithConsole {
                 .expectsQuestion("Enter the book title: ", "Title")
                 .expectsOutput("Thank you for returning the book")
                 .execute();
+    }
+
+    @Test
+    public void throwInvalidBookException() throws Exception {
+        expectedException.expect(InvalidBookException.class);
+        expectedException.expectMessage(InvalidBookException.MESSAGE);
+
+        List<Book> books = new ArrayList<>();
+
+        when(bookRepository.all()).thenReturn(books);
+
+        doReturn("Title").when(console).askQuestion("Enter the book title: ");
+
+        returnABookOption.show();
     }
 }
