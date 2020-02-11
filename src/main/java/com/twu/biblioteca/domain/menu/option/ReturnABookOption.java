@@ -2,30 +2,29 @@ package com.twu.biblioteca.domain.menu.option;
 
 import com.twu.biblioteca.exception.BookNotAvailableException;
 import com.twu.biblioteca.exception.InvalidBookException;
-import com.twu.biblioteca.foundation.Question;
+import com.twu.biblioteca.foundation.Console;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.service.BookService;
-
-import java.io.PrintStream;
+import com.twu.biblioteca.service.CheckoutBookService;
 
 public class ReturnABookOption extends MenuOption {
     public static final int NUMBER = 3;
     public static final boolean GUARDED = true;
     public static final String LABEL = "Return a Book";
 
-    private Question question;
-    private BookService bookService;
+    private final BookService bookService;
+    private final CheckoutBookService checkoutService;
 
-    public ReturnABookOption(PrintStream out, Question question, BookService bookService) {
-        super(NUMBER, LABEL, out, GUARDED);
+    public ReturnABookOption(Console console, BookService bookService, CheckoutBookService checkoutService) {
+        super(NUMBER, LABEL, console, GUARDED);
 
-        this.question = question;
         this.bookService = bookService;
+        this.checkoutService = checkoutService;
     }
 
     @Override
     public void show() throws InvalidBookException {
-        String title = question.askForString("Enter the book title: ");
+        String title = console.askQuestion("Enter the book title: ");
         Book book;
 
         try {
@@ -34,7 +33,7 @@ public class ReturnABookOption extends MenuOption {
             throw new InvalidBookException();
         }
 
-        bookService.returnBook(book);
-        out.println("Thank you for returning the book");
+        checkoutService.returnBook(book);
+        console.doWrite("Thank you for returning the book");
     }
 }

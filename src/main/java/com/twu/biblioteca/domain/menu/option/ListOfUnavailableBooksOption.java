@@ -1,28 +1,28 @@
 package com.twu.biblioteca.domain.menu.option;
 
-import com.twu.biblioteca.model.Book;
-import com.twu.biblioteca.service.BookService;
-
-import java.io.PrintStream;
+import com.twu.biblioteca.foundation.Console;
+import com.twu.biblioteca.model.Checkout;
+import com.twu.biblioteca.service.CheckoutBookService;
 
 public class ListOfUnavailableBooksOption extends MenuOption {
     private static final int NUMBER = 7;
     private static final String LABEL = "List of Unavailable Books";
 
-    private final BookService bookService;
+    private final CheckoutBookService checkoutBookService;
 
-    public ListOfUnavailableBooksOption(PrintStream out, BookService bookService) {
-        super(NUMBER, LABEL, out);
+    public ListOfUnavailableBooksOption(Console console, CheckoutBookService checkoutBookService) {
+        super(NUMBER, LABEL, console);
 
-        this.bookService = bookService;
+        this.checkoutBookService = checkoutBookService;
     }
 
     @Override
     public void show() {
-        bookService.getUnavailableBooks()
+        checkoutBookService
+                .getAllCheckedOutBooks()
                 .stream()
-                .map(Book::toString)
+                .map(Checkout::toString)
                 .reduce((accumulator, book) -> String.format("%s\n%s", accumulator, book))
-                .ifPresent(out::println);
+                .ifPresent(console::doWrite);
     }
 }

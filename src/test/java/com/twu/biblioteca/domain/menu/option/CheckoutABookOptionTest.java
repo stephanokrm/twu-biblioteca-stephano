@@ -1,14 +1,16 @@
 package com.twu.biblioteca.domain.menu.option;
 
-import com.twu.biblioteca.TestCase;
+import com.twu.biblioteca.InteractsWithConsole;
 import com.twu.biblioteca.domain.menu.Menu;
-import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.Checkout;
 import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.CheckoutRepository;
 import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.AuthService;
 import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.CheckoutBookService;
 import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
 
@@ -17,63 +19,54 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class CheckoutABookOptionTest extends TestCase {
+public class CheckoutABookOptionTest extends InteractsWithConsole {
     private Menu menu;
-    private Question question;
-    private BookRepository bookRepository;
+    private List<Book> books;
+    private CheckoutABookOption checkoutABookOption;
 
     @Override
     public void setUp() {
         super.setUp();
 
-        question = mock(Question.class);
-        bookRepository = mock(BookRepository.class);
-
+        List<Checkout> checkouts = new ArrayList<>();
         UserRepository userRepository = mock(UserRepository.class);
-        BookService bookService = new BookService(bookRepository);
+        BookRepository bookRepository = mock(BookRepository.class);
+        CheckoutRepository checkoutRepository = mock(CheckoutRepository.class);
+        CheckoutBookService checkoutService = new CheckoutBookService(checkoutRepository);
+        BookService bookService = new BookService(bookRepository, checkoutService);
         UserService userService = new UserService(userRepository);
         AuthService authService = new AuthService(userService);
-        CheckoutABookOption checkoutABookOption = new CheckoutABookOption(out, question, bookService, authService);
+
+        books = new ArrayList<>();
+
+        checkoutABookOption = new CheckoutABookOption(console, bookService, checkoutService, authService);
 
         authService.actingAs(new User("0", "0", "Name", "email@gmail.com", "(00) 00000-0000"));
-        menu = new Menu(out, authService);
+
+        menu = new Menu(console, authService);
         menu.addOption(checkoutABookOption);
+
+        doReturn(books).when(bookRepository).all();
+        doReturn(checkouts).when(checkoutRepository).all();
     }
 
     @Test
     public void showCheckoutABookOption() {
         menu.open();
 
-        verify(out).println("2. Checkout a Book");
+        verify(console).doWrite("2. Checkout a Book");
     }
 
     @Test
-    public void askForBookTitle() throws Exception {
+    public void runCheckoutABookOption() throws Exception {
         Book book = new Book("Title", "Author", 2020);
 
-        List<Book> books = new ArrayList<>();
         books.add(book);
 
-        when(question.askForString("Enter the book title: ")).thenReturn("Title");
-        when(bookRepository.all()).thenReturn(books);
-
-        menu.run(CheckoutABookOption.NUMBER);
-
-        verify(question).askForString("Enter the book title: ");
-    }
-
-    @Test
-    public void notifyWhenSuccessfullyCheckOutBook() throws Exception {
-        Book book = new Book("Title", "Author", 2020, true);
-
-        List<Book> books = new ArrayList<>();
-        books.add(book);
-
-        when(question.askForString("Enter the book title: ")).thenReturn("Title");
-        when(bookRepository.all()).thenReturn(books);
-
-        menu.run(CheckoutABookOption.NUMBER);
-
-        verify(out).println("Thank you! Enjoy the book");
+        option(checkoutABookOption)
+                .expectsOutput("Checkout a Book")
+                .expectsQuestion("Enter the book title: ", "Title")
+                .expectsOutput("Thank you! Enjoy the book")
+                .execute();
     }
 }
