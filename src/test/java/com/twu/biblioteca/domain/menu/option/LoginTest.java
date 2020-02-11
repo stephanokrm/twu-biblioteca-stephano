@@ -1,55 +1,56 @@
 package com.twu.biblioteca.domain.menu.option;
 
-import com.twu.biblioteca.TestCase;
+import com.twu.biblioteca.InteractsWithConsole;
 import com.twu.biblioteca.domain.menu.Menu;
-import com.twu.biblioteca.foundation.Question;
+import com.twu.biblioteca.model.User;
+import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.AuthService;
+import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class LoginTest extends TestCase {
-    private Menu menu;
-    private Question question;
+public class LoginTest extends InteractsWithConsole {
+    private List<User> users;
+    private LoginOption loginOption;
     private AuthService authService;
 
     @Override
     public void setUp() {
         super.setUp();
 
-        question = mock(Question.class);
+        UserRepository userRepository = mock(UserRepository.class);
+        UserService userService = new UserService(userRepository);
 
-        authService = mock(AuthService.class);
-        LoginOption loginOption = new LoginOption(out, question, authService);
+        users = new ArrayList<>();
+        authService = new AuthService(userService);
 
-        menu = new Menu(out, authService);
-        menu.addOption(loginOption);
+        loginOption = new LoginOption(console, authService);
+
+        doReturn(users).when(userRepository).all();
     }
 
     @Test
     public void showLoginOption() {
+        Menu menu = new Menu(console, authService);
+        menu.addOption(loginOption);
         menu.open();
 
-        verify(out).println("6. Login");
+        verify(console).doWrite("6. Login");
     }
 
     @Test
-    public void askForLibraryNumber() throws Exception {
-        doNothing().when(authService).authenticate("Library Number", "Password");
-        when(question.askForString("Enter your library number: ")).thenReturn("Library Number");
+    public void runLogin() throws Exception {
+        User user = new User("0", "0", "Name", "Email", "Phone");
+        users.add(user);
 
-        menu.run(LoginOption.NUMBER);
-
-        verify(question).askForString("Enter your library number: ");
-    }
-
-    @Test
-    public void askForPassword() throws Exception {
-        doNothing().when(authService).authenticate("Library Number", "Password");
-        when(question.askForString("Enter your password: ")).thenReturn("Password");
-
-        menu.run(LoginOption.NUMBER);
-
-        verify(question).askForString("Enter your password: ");
+        option(loginOption)
+                .expectsOutput("Login")
+                .expectsQuestion("Enter your library number: ", "0")
+                .expectsQuestion("Enter your password: ", "0")
+                .execute();
     }
 }

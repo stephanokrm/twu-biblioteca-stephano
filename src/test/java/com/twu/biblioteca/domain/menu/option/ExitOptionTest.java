@@ -1,6 +1,6 @@
 package com.twu.biblioteca.domain.menu.option;
 
-import com.twu.biblioteca.TestCase;
+import com.twu.biblioteca.InteractsWithConsole;
 import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.AuthService;
@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class ExitOptionTest extends TestCase {
+public class ExitOptionTest extends InteractsWithConsole {
     private Menu menu;
     private ExitOption exitOption;
 
@@ -18,26 +18,26 @@ public class ExitOptionTest extends TestCase {
     public void setUp() {
         super.setUp();
 
-        exitOption = new ExitOption(out);
-
         UserRepository userRepository = mock(UserRepository.class);
         UserService userService = new UserService(userRepository);
 
-        menu = new Menu(out, new AuthService(userService));
+        exitOption = new ExitOption(console);
+
+        menu = new Menu(console, new AuthService(userService));
         menu.addOption(exitOption);
-    }
-
-    @Test
-    public void showExitMessage() {
-        exitOption.show();
-
-        verify(out).println("Closing the application...");
     }
 
     @Test
     public void showExitOption() {
         menu.open();
 
-        verify(out).println("0. Exit");
+        verify(console).doWrite("0. Exit");
+    }
+
+    @Test
+    public void runExitOption() throws Exception {
+        option(exitOption)
+                .expectsOutput("Exit")
+                .execute();
     }
 }

@@ -1,12 +1,13 @@
 package com.twu.biblioteca.domain.menu.option;
 
-import com.twu.biblioteca.TestCase;
+import com.twu.biblioteca.InteractsWithConsole;
 import com.twu.biblioteca.domain.menu.Menu;
-import com.twu.biblioteca.foundation.Question;
 import com.twu.biblioteca.model.Movie;
+import com.twu.biblioteca.repository.CheckoutRepository;
 import com.twu.biblioteca.repository.MovieRepository;
 import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.AuthService;
+import com.twu.biblioteca.service.CheckoutMovieService;
 import com.twu.biblioteca.service.MovieService;
 import com.twu.biblioteca.service.UserService;
 import org.junit.Test;
@@ -16,46 +17,49 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class CheckoutAMovieOptionTest extends TestCase {
+public class CheckoutAMovieOptionTest extends InteractsWithConsole {
     private Menu menu;
-    private Question question;
-    private MovieRepository movieRepository;
+    private List<Movie> movies;
+    private CheckoutAMovieOption checkoutAMovieOption;
 
     @Override
     public void setUp() {
         super.setUp();
 
-        question = mock(Question.class);
-        movieRepository = mock(MovieRepository.class);
-
         UserRepository userRepository = mock(UserRepository.class);
-        MovieService movieService = new MovieService(movieRepository);
+        MovieRepository movieRepository = mock(MovieRepository.class);
+        CheckoutRepository checkoutRepository = new CheckoutRepository();
+        CheckoutMovieService checkoutService = new CheckoutMovieService(checkoutRepository);
+        MovieService movieService = new MovieService(movieRepository, checkoutService);
         UserService userService = new UserService(userRepository);
-        CheckoutAMovieOption checkoutAMovieOption = new CheckoutAMovieOption(out, question, movieService);
+        AuthService authService = new AuthService(userService);
 
-        menu = new Menu(out, new AuthService(userService));
+        movies = new ArrayList<>();
+
+        checkoutAMovieOption = new CheckoutAMovieOption(console, movieService, checkoutService, authService);
+
+        menu = new Menu(console, authService);
         menu.addOption(checkoutAMovieOption);
+
+        doReturn(movies).when(movieRepository).all();
     }
 
     @Test
     public void showCheckoutAMovieOption() {
         menu.open();
 
-        verify(out).println("5. Checkout a Movie");
+        verify(console).doWrite("5. Checkout a Movie");
     }
 
     @Test
-    public void askForMovieName() throws Exception {
-        Movie movie = new Movie("Name", 2020, "Director", 10, true);
+    public void runCheckoutAMovieOption() throws Exception {
+        Movie movie = new Movie("Name", 2020, "Director", 10);
 
-        List<Movie> movies = new ArrayList<>();
         movies.add(movie);
 
-        when(question.askForString("Enter the movie name: ")).thenReturn("Name");
-        when(movieRepository.all()).thenReturn(movies);
-
-        menu.run(CheckoutAMovieOption.NUMBER);
-
-        verify(question).askForString("Enter the movie name: ");
+        option(checkoutAMovieOption)
+                .expectsOutput("Checkout a Movie")
+                .expectsQuestion("Enter the movie name: ", "Name")
+                .execute();
     }
 }

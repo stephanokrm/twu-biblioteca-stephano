@@ -8,27 +8,27 @@ import java.util.stream.Collectors;
 
 public class MovieService {
     private final MovieRepository movieRepository;
+    private final CheckoutMovieService checkoutService;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository, CheckoutMovieService checkoutService) {
         this.movieRepository = movieRepository;
+        this.checkoutService = checkoutService;
     }
 
     public List<Movie> getAvailableMovies() {
-        return this.movieRepository.all()
+        return this.movieRepository
+                .all()
                 .stream()
-                .filter(Movie::isAvailable)
+                .filter(checkoutService::movieIsAvailable)
                 .collect(Collectors.toList());
     }
 
     public Movie getMovieByName(String name) {
-        return this.movieRepository.all()
+        return this.movieRepository
+                .all()
                 .stream()
-                .filter(book -> book.getName().equals(name))
+                .filter(book -> book.getTitle().equals(name))
                 .findFirst()
                 .get();
-    }
-
-    public void checkOutMovie(Movie movie) {
-        movie.setAvailable(false);
     }
 }

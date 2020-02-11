@@ -1,30 +1,14 @@
 package com.twu.biblioteca.model;
 
-public class Movie implements Model {
-    private String name;
-    private int year;
-    private String director;
-    private int rating;
-    private boolean available;
+public class Movie extends Work {
+    private final Integer rating;
+    private final String director;
 
-    public Movie(String name, int year, String director, int rating, boolean available) {
-        this.name = name;
-        this.year = year;
+    public Movie(String name, int year, String director, Integer rating) {
+        super(name, year);
+
         this.director = director;
         this.rating = rating;
-        this.available = available;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 
     private String getMovieRating() {
@@ -35,6 +19,6 @@ public class Movie implements Model {
     public String toString() {
         String movieRating = getMovieRating();
 
-        return String.format("Name: %s | Year: %d | Director: %s | Rating: %s", name, year, director, movieRating);
+        return String.format("Name: %s | Year: %d | Director: %s | Rating: %s", getTitle(), getYear(), director, movieRating);
     }
 }

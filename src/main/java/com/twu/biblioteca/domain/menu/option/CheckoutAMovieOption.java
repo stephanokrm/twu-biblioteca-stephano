@@ -1,29 +1,37 @@
 package com.twu.biblioteca.domain.menu.option;
 
-import com.twu.biblioteca.foundation.Question;
+import com.twu.biblioteca.foundation.Console;
 import com.twu.biblioteca.model.Movie;
+import com.twu.biblioteca.service.AuthService;
+import com.twu.biblioteca.service.CheckoutMovieService;
 import com.twu.biblioteca.service.MovieService;
-
-import java.io.PrintStream;
 
 public class CheckoutAMovieOption extends MenuOption {
     public static final int NUMBER = 5;
     public static final String LABEL = "Checkout a Movie";
+    public static final boolean GUARDER = true;
 
-    private final Question question;
     private final MovieService movieService;
+    private final CheckoutMovieService checkoutService;
+    private final AuthService authService;
 
-    public CheckoutAMovieOption(PrintStream out, Question question, MovieService movieService) {
-        super(NUMBER, LABEL, out);
+    public CheckoutAMovieOption(
+            Console console,
+            MovieService movieService,
+            CheckoutMovieService checkoutService,
+            AuthService authService
+    ) {
+        super(NUMBER, LABEL, console, GUARDER);
 
-        this.question = question;
         this.movieService = movieService;
+        this.checkoutService = checkoutService;
+        this.authService = authService;
     }
 
     @Override
     public void show() {
-        String name = question.askForString("Enter the movie name: ");
+        String name = console.askQuestion("Enter the movie name: ");
         Movie movie = movieService.getMovieByName(name);
-        movieService.checkOutMovie(movie);
+        checkoutService.checkoutMovie(movie, authService.getUser());
     }
 }

@@ -1,21 +1,21 @@
 package com.twu.biblioteca.domain.menu.option;
 
-import java.io.PrintStream;
+import com.twu.biblioteca.foundation.Console;
 
 public abstract class MenuOption {
-    protected final PrintStream out;
     private final int number;
     private final String label;
     private final boolean guarded;
+    protected final Console console;
 
-    public MenuOption(int number, String label, PrintStream out) {
-        this(number, label, out, false);
+    public MenuOption(int number, String label, Console console) {
+        this(number, label, console, false);
     }
 
-    public MenuOption(int number, String label, PrintStream out, boolean guarded) {
+    public MenuOption(int number, String label, Console console, boolean guarded) {
         this.number = number;
         this.label = label;
-        this.out = out;
+        this.console = console;
         this.guarded = guarded;
     }
 
@@ -23,8 +23,12 @@ public abstract class MenuOption {
         return number;
     }
 
+    public boolean isGuarded() {
+        return guarded;
+    }
+
     public void open() throws Exception {
-        out.printf("\n%s%n", label);
+        console.doWrite(label);
 
         show();
     }
@@ -34,9 +38,5 @@ public abstract class MenuOption {
     @Override
     public String toString() {
         return String.format("%d. %s", number, label);
-    }
-
-    public boolean isGuarded() {
-        return guarded;
     }
 }
