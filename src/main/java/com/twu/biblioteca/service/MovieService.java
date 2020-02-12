@@ -27,7 +27,7 @@ public class MovieService {
         return this.movieRepository
                 .all()
                 .stream()
-                .filter(book -> book.getTitle().equals(name))
+                .filter(book -> book.getTitle().equalsIgnoreCase(name))
                 .findFirst()
                 .get();
     }

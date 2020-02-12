@@ -36,7 +36,7 @@ public class BookService {
         return this.bookRepository
                 .all()
                 .stream()
-                .filter(book -> book.getTitle().equals(title))
+                .filter(book -> book.getTitle().equalsIgnoreCase(title))
                 .findFirst()
                 .orElseThrow(BookNotAvailableException::new);
     }

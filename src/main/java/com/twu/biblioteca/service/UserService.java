@@ -14,7 +14,7 @@ public class UserService {
         return userRepository
                 .all()
                 .stream()
-                .filter(user -> user.getLibraryNumber().equals(libraryNumber))
+                .filter(user -> user.getLibraryNumber().equalsIgnoreCase(libraryNumber))
                 .findFirst()
                 .orElse(null);
     }

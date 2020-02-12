@@ -30,13 +30,13 @@ public abstract class CheckoutService {
         return checkoutRepository
                 .all()
                 .stream()
-                .anyMatch(checkout -> checkout.getWork().getTitle().equals(work.getTitle()));
+                .anyMatch(checkout -> checkout.getWork().getTitle().equalsIgnoreCase(work.getTitle()));
     }
 
     protected void returnWork(Work work) {
         checkoutRepository
                 .all()
-                .removeIf(checkout -> checkout.getWork().getTitle().equals(work.getTitle()));
+                .removeIf(checkout -> checkout.getWork().getTitle().equalsIgnoreCase(work.getTitle()));
     }
 
     protected List<Checkout> getAllCheckedOutWorks() {
