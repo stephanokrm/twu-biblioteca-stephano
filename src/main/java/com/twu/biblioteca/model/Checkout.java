@@ -19,6 +19,6 @@ public class Checkout implements Model {
 
     @Override
     public String toString() {
-        return String.format("Work: %s | Renter Library Number: %s", work.getTitle(), user.getLibraryNumber());
+        return String.format("%s: %s | Renter Library Number: %s", work.getClass().getSimpleName(), work.getTitle(), user.getLibraryNumber());
     }
 }
