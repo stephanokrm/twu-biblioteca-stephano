@@ -45,6 +45,7 @@ public class LoginTest extends InteractsWithConsole {
     @Test
     public void runLogin() throws Exception {
         User user = new User("0", "0", "Name", "Email", "Phone");
+
         users.add(user);
 
         option(loginOption)

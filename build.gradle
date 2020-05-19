@@ -7,7 +7,7 @@ group 'com.twu.biblioteca'
 version '2.4'
 
 repositories {
-    google()
+    mavenCentral()
 }
 
 dependencies {

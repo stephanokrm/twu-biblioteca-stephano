@@ -19,7 +19,7 @@ public class LoginOption extends MenuOption {
     @Override
     public void show() throws AuthenticationException {
         String libraryNumber = console.askQuestion("Enter your library number: ");
-        String password = console.askQuestion("Enter your password: ");
+        String password = console.askPassword("Enter your password: ");
 
         authService.authenticate(libraryNumber, password);
     }

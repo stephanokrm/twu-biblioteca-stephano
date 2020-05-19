@@ -1,5 +1,6 @@
 package com.twu.biblioteca.foundation;
 
+import java.io.Console;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -13,5 +14,15 @@ public class Input {
 
     public String askQuestion() {
         return scanner.next();
+    }
+
+    public char[] askPassword() {
+        Console console = System.console();
+
+        if (console == null) {
+            return scanner.next().toCharArray();
+        }
+
+        return console.readPassword();
     }
 }

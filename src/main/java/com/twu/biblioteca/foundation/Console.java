@@ -18,4 +18,10 @@ public class Console {
 
         return input.askQuestion();
     }
+
+    public String askPassword(String question) {
+        doWrite(question);
+
+        return new String(input.askPassword());
+    }
 }

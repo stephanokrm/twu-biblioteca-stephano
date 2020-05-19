@@ -4,6 +4,7 @@ import com.twu.biblioteca.InteractsWithConsole;
 import com.twu.biblioteca.domain.menu.Menu;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Checkout;
+import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.repository.CheckoutRepository;
 import com.twu.biblioteca.repository.UserRepository;
@@ -56,14 +57,15 @@ public class ListOfUnavailableBooksOptionTest extends InteractsWithConsole {
 
         checkouts.add(checkout);
 
-        book = new Book("Book 2", "Person 2", 2020);
-        checkout = new Checkout(book, user);
+        Movie movie = new Movie("Movie 2", 2020, "Person 2", 10);
+
+        checkout = new Checkout(movie, user);
 
         checkouts.add(checkout);
 
         option(listOfUnavailableBooksOption)
                 .expectsOutput("List of Unavailable Books")
-                .expectsOutput("Work: Book 1 | Renter Library Number: 0\nWork: Book 2 | Renter Library Number: 0")
+                .expectsOutput("Book: Book 1 | Renter Library Number: 0\nMovie: Movie 2 | Renter Library Number: 0")
                 .execute();
     }
 }
